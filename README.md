@@ -1,1 +1,1 @@
-# NextGen-Laravel-Startup-Kit
+# NextGen
