@@ -30,7 +30,7 @@
                         </div><!-- end title -->
 
                         <div class="single-post-media">
-                            <img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" class="img-fluid">
+                            <img src="{{ image($post->image) }}" alt="{{ $post->title }}" class="img-fluid">
                         </div><!-- end media -->
 
                         <div class="blog-content">
@@ -43,7 +43,7 @@
                             <h4 class="small-title">About author</h4>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <img src="upload/author.jpg" alt="" class="img-fluid rounded-circle">
+                                    <img src="{{image($post->authorId->avatar)}}" alt="" class="img-fluid rounded-circle">
                                 </div><!-- end col -->
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
