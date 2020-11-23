@@ -4,7 +4,7 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="{{route('home')}}"><img src="{{ asset('storage/'.setting('site.logo')) }}" alt=""></a>
+            <a class="navbar-brand" href="{{route('home')}}"><img src="{{ image(setting('site.logo')) }}" alt="{{ config('app.name') }}"></a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 {!! menu('main-nav', 'frontend.v1.layouts.main_menu') !!}
                 <ul class="navbar-nav mr-2">

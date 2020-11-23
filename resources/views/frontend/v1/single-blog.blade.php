@@ -29,10 +29,6 @@
                             </div><!-- end meta -->
                         </div><!-- end title -->
 
-                        <div class="single-post-media">
-                            <img src="{{ image($post->image) }}" alt="{{ $post->title }}" class="img-fluid">
-                        </div><!-- end media -->
-
                         <div class="blog-content">
                             <div class="pp">
                                 {!! $post->body !!}

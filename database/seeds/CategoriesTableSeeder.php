@@ -74,24 +74,6 @@ class CategoriesTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($categoryDataType, 'order');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.order'),
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => [
-                    'default' => 1,
-                ],
-                'order' => 3,
-            ])->save();
-        }
-
         $dataRow = $this->dataRow($categoryDataType, 'name');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -103,7 +85,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 4,
+                'order'        => 3,
             ])->save();
         }
 
@@ -123,7 +105,39 @@ class CategoriesTableSeeder extends Seeder
                         'origin' => 'name',
                     ],
                 ],
+                'order' => 4,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($categoryDataType, 'icon');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => "Select Icon",
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => [],
                 'order' => 5,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($categoryDataType, 'homepage');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'checkbox',
+                'display_name' => "Homepage Category",
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => [],
+                'order' => 6,
             ])->save();
         }
 
@@ -138,7 +152,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 9,
+                'order'        => 11,
             ])->save();
         }
 
@@ -148,12 +162,12 @@ class CategoriesTableSeeder extends Seeder
                 'type'         => 'text',
                 'display_name' => "Meta Title",
                 'required'     => 0,
-                'browse'       => 1,
+                'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 14,
+                'order'        => 10,
             ])->save();
         }
 
@@ -168,7 +182,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 6,
+                'order'        => 7,
             ])->save();
         }
 
@@ -183,7 +197,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 7,
+                'order'        => 8,
             ])->save();
         }
 
@@ -201,7 +215,7 @@ class CategoriesTableSeeder extends Seeder
                 'icon_class' => 'voyager-categories',
                 'color'      => null,
                 'parent_id'  => null,
-                'order'      => 8,
+                'order'      => 9,
             ])->save();
         }
 
@@ -210,22 +224,109 @@ class CategoriesTableSeeder extends Seeder
 
         //Content
         $category = Category::firstOrNew([
-            'slug' => 'offers',
+            'slug' => 'wordpress',
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name' => 'Offers',
+                'name'             => 'Wordpress',
+                'icon'             => 'fab fa-wordpress',
+                'homepage'         => true,
+                'meta_title'       => 'Top Selling WordPress Themes, Templates | Best WP plugin deals, reviews',
+                'meta_description' => 'Set your WordPress website at an affordable price with the best WordPress Themes, Templates coupons. Free, Paid WordPress Plugins for making WP websites faster.'
             ])->save();
         }
 
         $category = Category::firstOrNew([
-            'slug' => 'reviews',
+            'slug' => 'software',
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name' => 'Reviews',
+                'name'             => 'Software',
+                'icon'             => 'fab fa-windows',
+                'homepage'         => true,
+                'meta_title'       => 'Best Software Stores Online - Coupons, Brands Reviews, Best 10 Lists',
+                'meta_description' => 'Have a look at the Top rated Software brands reviews & Best 10 Software stores in each category. Grab biggest coupons, deals on best selling Software tools.'
             ])->save();
         }
+
+        $category = Category::firstOrNew([
+            'slug' => 'vpn',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'             => 'VPN',
+                'icon'             => 'fas fa-network-wired',
+                'homepage'         => true,
+                'meta_title'       => 'Best Selling VPN Brands Reviews, Latest Deals & Best 10 VPNs List',
+                'meta_description' => 'Compare Top rated VPN Brands reviews, ratings to get idea of best services. To save your penny on the Best 10 VPN services use latest coupons & deals.'
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
+            'slug' => 'travel',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'             => 'Travel',
+                'icon'             => 'fas fa-plane-departure',
+                'homepage'         => true,
+                'meta_title'       => 'Must have Travel Essentials, Best Brands List, Reviews, Tips & Tricks',
+                'meta_description' => 'List of Top Stores for your Travel essentials. Check out the Best brands, reviews, user ratings and safe tips for your Travelling, vacation trips.'
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
+            'slug' => 'hosting',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'             => 'Hosting',
+                'icon'             => 'fas fa-server',
+                'homepage'         => true,
+                'meta_title'       => 'Free & Paid Web Hosting Services | Best Hosting list, Coupons, Reviews',
+                'meta_description' => 'Hand curated reviews, ratings of Web hosting best companies, and Top 10 Web hosting platforms mentioned here. Grab the working coupons & deals here.'
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
+            'slug' => 'graphic-design',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'             => 'Graphic Design',
+                'icon'             => 'fas fa-photo-video',
+                'homepage'         => true,
+                'meta_title'       => 'Free Graphic Design Softwares & Tools - Best 10 list, Reviews, & Offers',
+                'meta_description' => 'Check Best lists of Graphic Designing tools for making your visual communication beautiful. See Top Graphic design software brands reviews, coupons & deals.'
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
+            'slug' => 'games',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'             => 'Games',
+                'icon'             => 'fab fa-xbox',
+                'homepage'         => true,
+                'meta_title'       => 'Games',
+                'meta_description' => 'games.'
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
+            'slug' => 'fonts',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'             => 'Fonts',
+                'icon'             => 'fas fa-font',
+                'homepage'         => true,
+                'meta_title'       => 'Top quality Fonts Online - Best 10 Fonts Brands Reviews & Coupons',
+                'meta_description' => 'Tons of great deals on Fonts styles design softwares. Check out Top Font brands reviews such as Font Bundles, Fontspring, Best 10 fonts list free & paid.'
+            ])->save();
+        }
+
     }
 
     /**

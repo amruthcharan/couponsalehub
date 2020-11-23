@@ -24,3 +24,11 @@ mix.scripts([
             'resources/css/v1/colors.css',
             'resources/css/v1/core.css',
         ], 'public/css/v1.css');
+
+
+mix.scripts([
+    'resources/js/v2/easing.min.js',
+    'resources/js/v2/slick.min.js',
+    'resources/js/v2/v2.js',
+], 'public/js/v2.js')
+.copy('resources/js/voyager_additional.js', 'public/js');

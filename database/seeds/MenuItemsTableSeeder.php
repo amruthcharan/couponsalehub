@@ -177,8 +177,8 @@ class MenuItemsTableSeeder extends Seeder
         $menu2 = Menu::where('name', 'main-nav')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu2->id,
-            'title'   => "Reviews",
-            'url'     => '/reviews',
+            'title'   => "Reviews & Offers",
+            'url'     => '/reviews-and-offers',
             'route'   => null,
         ]);
         if (!$menuItem->exists) {
@@ -192,8 +192,8 @@ class MenuItemsTableSeeder extends Seeder
         }
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu2->id,
-            'title'   => "Offers",
-            'url'     => '/offers',
+            'title'   => "Guides",
+            'url'     => '/guides',
             'route'   => null,
         ]);
         if (!$menuItem->exists) {
@@ -207,8 +207,8 @@ class MenuItemsTableSeeder extends Seeder
         }
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu2->id,
-            'title'   => "Blog",
-            'url'     => '/blog',
+            'title'   => "About Us",
+            'url'     => '/about-us',
             'route'   => null,
         ]);
         if (!$menuItem->exists) {
@@ -222,8 +222,8 @@ class MenuItemsTableSeeder extends Seeder
         }
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu2->id,
-            'title'   => "About Us",
-            'url'     => '/about-us',
+            'title'   => "Contact Us",
+            'url'     => '/contact-us',
             'route'   => null,
         ]);
         if (!$menuItem->exists) {

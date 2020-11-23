@@ -15,8 +15,8 @@
 <meta name="author" content="@yield('author', 'Amruth Charan')">
 
 <!-- Site Icons -->
-<link rel="shortcut icon" href="{{ asset('storage/'.setting('site.favicon')) }}" type="image/x-icon" />
-<link rel="apple-touch-icon" href="{{ asset('storage/'.setting('site.favicon')) }}">
+<link rel="shortcut icon" href="{{ image(setting('site.favicon')) }}" type="image/x-icon" />
+<link rel="apple-touch-icon" href="{{ image(setting('site.favicon')) }}">
 
 <!-- Design fonts -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -37,7 +37,7 @@
 
 <!-- Core JavaScript
 ================================================== -->
-<script src="{{ asset('js/v1.js') }}"></script>
+<script src="{{ asset('js/v1.js') }}" defer></script>
 
 </body>
 </html>

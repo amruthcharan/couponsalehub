@@ -135,6 +135,21 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($userDataType, 'bio');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => 'Bio',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 9,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($userDataType, 'user_belongsto_role_relationship');
         if (!$dataRow->exists) {
             $dataRow->fill([
