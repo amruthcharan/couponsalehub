@@ -15,7 +15,7 @@ class CreateRedirectsTable extends Migration
     {
         Schema::create('redirects', function (Blueprint $table) {
             $table->id();
-            $table->mediumText('slug')->unique();
+            $table->string('slug')->unique();
             $table->longText('redirect_to');
             $table->timestamps();
         });
