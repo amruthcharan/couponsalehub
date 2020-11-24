@@ -3,7 +3,7 @@
 /**********************************/
 body {
     color: #353535;
-    font-family: 'Open Sans', sans-serif;
+    font-family: Roboto, Arial, sans-serif;
     font-weight: 400;
     background: #f3f6ff;
 }
@@ -20,14 +20,24 @@ a:focus {
     text-decoration: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
 h1 {
-    font-family: Roboto, Arial, sans-serif;
-    font-weight: 900;
+    font-size: 2rem;
 }
 
 h2 {
-    font-family: Roboto, Arial, sans-serif;
-    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
 }
 
 @media(min-width: 992px) {
@@ -1178,14 +1188,8 @@ h2 {
     padding: 25px 15px 15px 15px;
 }
 
-.product-detail .tab-content ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
 .product-detail .tab-content ul li {
-    margin-bottom: 10px;
+    margin-bottom: 1px;
 }
 
 /*.product-detail .tab-content ul li::before {*/

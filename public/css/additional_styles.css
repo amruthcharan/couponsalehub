@@ -1,0 +1,3 @@
+.panel.is-fullscreen .mce-edit-area, .panel.is-fullscreen .mce-edit-area iframe, .panel.is-fullscreen .mce-edit-area iframe html {
+    position: inherit;
+}

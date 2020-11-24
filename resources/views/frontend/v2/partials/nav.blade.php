@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-xl navbar-light u-bg-white mb-2">
-    <a href="#" class="navbar-brand">
-        <img src="{{ image(setting('site.logo')) }}" href="/" alt="{{ config('app.name') }}" width="200px">
+    <a href="{{ route('home') }}" class="navbar-brand">
+        <img src="{{ image(setting('site.logo')) }}" alt="{{ config('app.name') }}" width="200px">
     </a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>

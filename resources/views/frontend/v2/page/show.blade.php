@@ -1,6 +1,6 @@
 @extends('frontend.layouts.v2')
 
-@section('title', $page->seo_title)
+@section('title', $page->meta_title)
 @section('description', $page->meta_description)
 
 @section('body')

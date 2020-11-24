@@ -12,7 +12,7 @@
                         <div class="col-lg-12">
                             <div class="tab-content">
                                 <div class="container">
-                                    <h1>Guides</h1>
+                                    <h1>Search</h1>
                                     <div class="row post-body">
                                         <form class="w-100" action="{{ route('search') }}">
                                             <div class="input-group">

@@ -177,8 +177,8 @@ class MenuItemsTableSeeder extends Seeder
         $menu2 = Menu::where('name', 'main-nav')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu2->id,
-            'title'   => "Reviews & Offers",
-            'url'     => '/reviews-and-offers',
+            'title'   => "Offers & Reviews",
+            'url'     => '/offers-and-reviews',
             'route'   => null,
         ]);
         if (!$menuItem->exists) {

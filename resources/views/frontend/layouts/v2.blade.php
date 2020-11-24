@@ -8,7 +8,6 @@
     <!-- Site Metas -->
     <title>{{ config('app.name') }} - @yield('title', 'home')</title>
     <meta name="description" content="@yield('description')">
-    <meta name="author" content="@yield('author', 'Amruth Charan')">
 
     <!-- Favicon -->
     <link href="{{ image(setting('site.favicon')) }}" rel="icon">

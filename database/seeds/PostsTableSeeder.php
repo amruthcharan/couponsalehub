@@ -55,10 +55,10 @@ class PostsTableSeeder extends Seeder
                 'display_name' => __('voyager::seeders.data_rows.author'),
                 'required'     => 1,
                 'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
+                'read'         => 0,
+                'edit'         => 0,
                 'add'          => 0,
-                'delete'       => 1,
+                'delete'       => 0,
                 'order'        => 2,
             ])->save();
         }
@@ -296,6 +296,32 @@ class PostsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'order'        => 15,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($postDataType, 'post_belongsto_user_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => "Author",
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => [
+                    "model"       => "App\\User",
+                    "table"       => "users",
+                    "type"        => "belongsTo",
+                    "column"      => "author_id",
+                    "key"         => "id",
+                    "label"       => "name",
+                    "pivot_table" => "categories",
+                    "pivot"       => "0",
+                    "taggable"    => "0"
+                ],
+                'order' => 16,
             ])->save();
         }
 

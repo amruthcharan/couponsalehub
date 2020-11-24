@@ -5,7 +5,7 @@
 
     <div class="row align-items-center product-slider product-slider-3">
         @foreach($related as $post)
-        <div class="col-lg-3">
+        <div class="col-lg-6">
             <div class="product-item">
                 <div class="product-image">
                     <a href="{{ route('page', $post->slug) }}">

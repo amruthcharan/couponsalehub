@@ -11,9 +11,8 @@
                     <div class="row product-detail-bottom">
                         <div class="col-lg-12">
                             <div class="tab-content">
-                            <div class="tab-content">
                                 <div class="container">
-                                    <h1>Search</h1>
+                                    <h1>Blog</h1>
                                     <div class="row post-body">
                                         @if($posts)
                                         @foreach($posts as $post)
