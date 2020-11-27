@@ -31,6 +31,8 @@ Route::post('/contact', 'ContactController@submit')->name('submit-contact');
 
 Route::get('/search', 'SearchController@search')->name('search');
 
+Route::resource('/headings', 'HeadingsController');
+
 Route::get('/{page}', 'PageController')->name('page');
 
 

@@ -26,16 +26,6 @@ class PermissionRoleTableSeeder extends Seeder
                                 'browse_bread',
                                 'browse_database',
                                 'browse_compass',
-                                'browse_menus',
-                                'read_menus',
-                                'edit_menus',
-                                'add_menus',
-                                'delete_menus',
-                                'browse_settings',
-                                'read_settings',
-                                'edit_settings',
-                                'add_settings',
-                                'delete_settings'
                             ];
         $permissions = Permission::whereNotIn('key', $superPermissions);
 
