@@ -28,7 +28,7 @@ class SettingsTableSeeder extends Seeder
                 'display_name' => __('voyager::seeders.settings.site.description'),
                 'value'        => __('voyager::seeders.settings.site.description'),
                 'details'      => '',
-                'type'         => 'rich_text_box',
+                'type'         => 'text_area',
                 'order'        => 2,
                 'group'        => 'Site',
             ])->save();
@@ -172,7 +172,7 @@ class SettingsTableSeeder extends Seeder
                 'display_name' => "Categories Description",
                 'value'        => '',
                 'details'      => '',
-                'type'         => 'rich_text_box',
+                'type'         => 'text_area',
                 'order'        => 9,
                 'group'        => 'Site',
             ])->save();
@@ -196,7 +196,7 @@ class SettingsTableSeeder extends Seeder
                 'display_name' => "Contact Page Description",
                 'value'        => '',
                 'details'      => '',
-                'type'         => 'rich_text_box',
+                'type'         => 'text_area',
                 'order'        => 11,
                 'group'        => 'Site',
             ])->save();
@@ -220,7 +220,7 @@ class SettingsTableSeeder extends Seeder
                 'display_name' => "Guides Page Description",
                 'value'        => '',
                 'details'      => '',
-                'type'         => 'rich_text_box',
+                'type'         => 'text_area',
                 'order'        => 13,
                 'group'        => 'Site',
             ])->save();
@@ -244,8 +244,32 @@ class SettingsTableSeeder extends Seeder
                 'display_name' => "Search Page Description",
                 'value'        => '',
                 'details'      => '',
-                'type'         => 'rich_text_box',
+                'type'         => 'text_area',
                 'order'        => 15,
+                'group'        => 'Site',
+            ])->save();
+        }
+
+        $setting = $this->findSetting('site.reviews-title');
+        if (!$setting->exists) {
+            $setting->fill([
+                'display_name' => "Reviews Page Title",
+                'value'        => '',
+                'details'      => '',
+                'type'         => 'text',
+                'order'        => 16,
+                'group'        => 'Site',
+            ])->save();
+        }
+
+        $setting = $this->findSetting('site.reviews-description');
+        if (!$setting->exists) {
+            $setting->fill([
+                'display_name' => "Reviews Page Description",
+                'value'        => '',
+                'details'      => '',
+                'type'         => 'text_area',
+                'order'        => 17,
                 'group'        => 'Site',
             ])->save();
         }

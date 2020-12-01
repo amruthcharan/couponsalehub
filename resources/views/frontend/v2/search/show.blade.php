@@ -24,6 +24,13 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        <div class="row">
+                                            @foreach($stores as $store)
+                                                <div class="col-md-3">
+                                                    @include('frontend.v2.partials.popular-store')
+                                                </div>
+                                            @endforeach
+                                        </div>
                                         @forelse($posts as $post)
                                             <div class="blog-box row m-3">
                                                 <div class="col-md-4">
@@ -44,9 +51,11 @@
                                                 </div><!-- end meta -->
                                             </div>
                                         @empty
+                                            @if(count($stores) == 0)
                                             <div class="w-100 text-center">
                                                 <p>Nothing found with your search term. Try Again!</p>
                                             </div>
+                                            @endif
                                         @endforelse
                                         <div class="col-md-12 mt-3">
                                             {!! $posts->links('frontend.v2.partials.pagination') !!}

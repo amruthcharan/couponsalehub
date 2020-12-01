@@ -22,8 +22,12 @@ class CreateStoresTable extends Migration
             $table->string('website_url');
             $table->string('affiliate_url')->nullable();
             $table->longText('first_paragraph')->nullable();
+            $table->longText('middle_paragraph')->nullable();
             $table->unsignedInteger('category_id');
             $table->longText('content')->nullable();
+            $table->boolean('top_review')->default(false);
+            $table->boolean('popular_store')->default(false);
+            $table->string('feature_image')->nullable();
             $table->string('seo_title');
             $table->string('seo_description');
             $table->string('seo_keywords')->nullable();

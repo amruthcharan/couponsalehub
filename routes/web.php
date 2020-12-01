@@ -25,6 +25,8 @@ Route::get('/categories', 'CategoriesPageController')->name('categories');
 
 Route::get('/guides', 'GuidesController')->name('guides');
 
+Route::get('/offers-and-reviews', 'ReviewsController')->name('reviews');
+
 Route::get('/contact-us', 'ContactController@show')->name('contact');
 
 Route::post('/contact', 'ContactController@submit')->name('submit-contact');

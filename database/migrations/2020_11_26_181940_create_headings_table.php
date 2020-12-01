@@ -17,7 +17,7 @@ class CreateHeadingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('store_id');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedInteger('order');
             $table->timestamps();
             $table->foreign('store_id')->references('id')->on('stores');

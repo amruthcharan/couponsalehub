@@ -224,6 +224,19 @@ class CategoriesTableSeeder extends Seeder
 
         //Content
         $category = Category::firstOrNew([
+            'slug' => 'service',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'             => 'Service',
+                'icon'             => 'fas users-cog',
+                'homepage'         => false,
+                'meta_title'       => 'Top quality Fonts Online - Best 10 Fonts Brands Reviews & Coupons',
+                'meta_description' => 'Tons of great deals on Fonts styles design softwares. Check out Top Font brands reviews such as Font Bundles, Fontspring, Best 10 fonts list free & paid.'
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
             'slug' => 'wordpress',
         ]);
         if (!$category->exists) {

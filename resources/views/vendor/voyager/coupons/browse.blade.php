@@ -1,14 +1,14 @@
 @extends('voyager::master')
 
-@section('page_title', __('voyager::generic.viewing').' '.$dataType->getTranslatedAttribute('display_name_plural'))
+@section('page_title', __('voyager::generic.viewing').' '.$dataType->getTranslatedAttribute('display_name_plural'). ' for '. $store->name .' store')
 
 @section('page_header')
     <div class="container-fluid">
         <h1 class="page-title">
-            <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
+            <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural'). ' for '. $store->name .' store' }}
         </h1>
         @can('add', app($dataType->model_name))
-            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
+            <a href="/admin/coupons/create?store_id={{$store->id}}" class="btn btn-success btn-add-new">
                 <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
             </a>
         @endcan
@@ -101,11 +101,11 @@
                                             @endif
                                         </th>
                                     @endforeach
-                                    <th class="text-center dt-not-orderable">Coupons</th>
                                     <th class="actions text-right dt-not-orderable">{{ __('voyager::generic.actions') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 @foreach($dataTypeContent as $data)
                                     <tr>
                                         @if($showCheckboxColumn)
@@ -251,15 +251,10 @@
                                                 @endif
                                             </td>
                                         @endforeach
-                                            <td class="text-center">
-                                                <a href="/admin/coupons?store_id={{ $data->id }}" class="btn-cart">
-                                                    <i class="voyager-ticket"></i><span style="padding-left: 5px;">{{ $data->coupons_count }}</span>
-                                                </a>
-                                            </td>
                                         <td class="no-sort no-click bread-actions">
                                             @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))
-                                                    @include('voyager::bread.partials.actions', ['action' => $action])
+                                                    @include('vendor.voyager.coupons.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
                                         </td>
@@ -306,6 +301,7 @@
                     <form action="#" id="delete_form" method="POST">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
+                        <input type="hidden" name="store_id" value="{{$store->id}}">
                         <input type="submit" class="btn btn-danger pull-right delete-confirm" value="{{ __('voyager::generic.delete_confirm') }}">
                     </form>
                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">{{ __('voyager::generic.cancel') }}</button>

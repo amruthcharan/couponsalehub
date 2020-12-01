@@ -21,7 +21,10 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name'           => 'TCG\\Voyager\\Policies\\UserPolicy',
                 'controller'            => 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController',
                 'generate_permissions'  => 1,
-                'description'           => ''
+                'description'           => '',
+                'details'               => [
+                    'scope' => 'available',
+                ]
             ])->save();
         }
 
@@ -50,6 +53,9 @@ class DataTypesTableSeeder extends Seeder
                 'controller'            => 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController',
                 'generate_permissions'  => 1,
                 'description'           => '',
+                'details'               => [
+                    'scope' => 'available',
+                ]
             ])->save();
         }
     }

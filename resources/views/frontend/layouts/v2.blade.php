@@ -36,5 +36,6 @@
 
 <!-- Template Javascript -->
 <script src="{{asset('js/v2.js')}}"></script>
+@yield('scripts')
 </body>
 </html>

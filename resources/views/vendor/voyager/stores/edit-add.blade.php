@@ -84,7 +84,7 @@
                         <div class="panel-body">
                             @php
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                                $exclude = ['logo', 'slug', 'seo_description', 'seo_keywords', 'seo_title', 'post_belongsto_category_relationship', 'content'];
+                                $exclude = ['logo', 'slug', 'seo_description', 'seo_keywords', 'seo_title', 'post_belongsto_category_relationship', 'content', 'feature_image', 'top_review', 'popular_store', 'middle_paragraph'];
                             @endphp
 
                             @foreach($dataTypeRows as $row)
@@ -115,6 +115,27 @@
                         </div>
                     </div>
 
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Middle Paragraph</h3>
+                            <div class="panel-actions">
+                                <a class="panel-action voyager-resize-full" data-toggle="panel-fullscreen" aria-hidden="true"></a>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            @include('voyager::multilingual.input-hidden', [
+                                '_field_name'  => 'middle_paragraph',
+                                '_field_trans' => 'middle_paragraph'
+                            ])
+                            @php
+                                $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
+                                $row = $dataTypeRows->where('field', 'middle_paragraph')->first();
+                            @endphp
+                            {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
+                        </div>
+                    </div>
+
                     <!-- ### CONTENT ### -->
                     <div class="panel">
                         <div class="panel-heading">
@@ -141,16 +162,22 @@
                     <!-- ### IMAGE ### -->
                     <div class="panel panel-bordered panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> Logo</h3>
+                            <h3 class="panel-title"><i class="icon wb-image"></i> Images</h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
-                            @if(isset($dataTypeContent->image))
-                                <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
+                            <label for="logo">Logo</label>
+                            @if(isset($dataTypeContent->logo))
+                                <img src="{{ filter_var($dataTypeContent->logo, FILTER_VALIDATE_URL) ? $dataTypeContent->logo : Voyager::image( $dataTypeContent->logo ) }}" style="width:100%" />
                             @endif
                             <input type="file" {{$add ? 'required' : ''}} name="logo">
+                            <label for="logo">Feature Image</label>
+                            @if(isset($dataTypeContent->feature_image))
+                                <img src="{{ filter_var($dataTypeContent->feature_image, FILTER_VALIDATE_URL) ? $dataTypeContent->feature_image : Voyager::image( $dataTypeContent->feature_image ) }}" style="width:100%" />
+                            @endif
+                            <input type="file" name="feature_image">
                         </div>
                     </div>
 
@@ -181,6 +208,15 @@
                                         <option value="{{ $category->id }}"@if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id) selected="selected"@endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" {{ $dataTypeContent->popular_store ? "checked" : "" }} class="form-check-input" name="popular_store" id="popular_store">
+                                <label class="form-check-label" for="popular_store">Popular Store</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" {{ $dataTypeContent->top_review ? "checked" : "" }} class="form-check-input" name="top_review" id="top_review">
+                                <label class="form-check-label" for="top_review">Top Review</label>
                             </div>
                         </div>
                     </div>
@@ -215,7 +251,7 @@
 
                     <!-- Headings -->
                     @if($edit)
-                        <div class="panel panel-bordered panel-dark">
+                        <div class="panel panel-bordered">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Headings</h3>
                                 <div class="panel-actions">
@@ -233,14 +269,18 @@
                                         <div class="panel-heading">
                                             <h4 class="panel-title">{{ $heading->order }} - {{ $heading->title }}</h4>
                                             <div class="panel-actions">
-                                                <div class="btn btn-warning" data-toggle="modal" data-id="{{ $heading->id }}" data-target="#edit-heading"><i class="voyager-edit"></i></div>
-                                                <div class="btn btn-danger" data-toggle="modal" data-id="{{ $heading->id }}" data-title="{{ $heading->title }}" data-target="#delete-heading"><i class="voyager-x"></i></div>
                                                 <a class="panel-action voyager-angle-down" data-toggle="collapse" data-target="#panel-{{ $heading->id }}" aria-hidden="true"></a>
                                             </div>
                                         </div>
                                         <div class="panel-collapse collapse" id="panel-{{ $heading->id }}">
                                             <div class="panel-body">
-                                                {{ $heading->description }}
+                                                <div class="col-md-6">
+                                                    {{ $heading->description }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="btn btn-warning" data-toggle="modal" data-id="{{ $heading->id }}" data-target="#edit-heading"><i class="voyager-edit"></i></div>
+                                                    <div class="btn btn-danger" data-toggle="modal" data-id="{{ $heading->id }}" data-title="{{ $heading->title }}" data-target="#delete-heading"><i class="voyager-x"></i></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -441,7 +481,7 @@
 
         $('document').ready(function () {
             $('#slug').slugify();
-            $('#store-form input[name=name]').change(function() {
+            $('#store-form input[name=name]').keyup(function() {
                 $('#slug').val($('#slug').val() + '-coupons');
             });
 
@@ -586,13 +626,17 @@
                     "<div class=\"panel-heading\">\n" +
                     "<h4 class=\"panel-title\">" + v.order + ' - ' + v.title + "</h4>\n" +
                     "<div class=\"panel-actions\">\n" +
-                    "<div class=\"btn btn-warning\" data-toggle=\"modal\" data-id='" + v.id + "' data-target=\"#edit-heading\"><i class=\"voyager-edit\"></i></div>\n" +
-                    "<div class=\"btn btn-danger\" data-toggle=\"modal\" data-id='" + v.id + "' data-title='" + v.title + "' data-target=\"#delete-heading\"><i class=\"voyager-x\"></i></div>\n" +
                     "<a class=\"panel-action voyager-angle-down\" data-toggle=\"collapse\" data-target=\"#panel-"+ v.id +"\" aria-hidden=\"true\"></a>\n" +
                     "</div>\n" +
                     "</div>\n" +
                     "<div class=\"panel-collapse collapse\" id=\"panel-" + v.id + "\">\n" +
-                    "<div class=\"panel-body\">\n" + v.description + "</div>\n" +
+                    "<div class=\"panel-body\">\n" +
+                    "<div class=\"col-md-6\">"+ (v.description || "") + "</div>" +
+                    "<div class=\"col-md-6\">" +
+                    "<div class=\"btn btn-warning\" data-toggle=\"modal\" data-id='" + v.id + "' data-target=\"#edit-heading\"><i class=\"voyager-edit\"></i></div>\n" +
+                    "<div class=\"btn btn-danger\" data-toggle=\"modal\" data-id='" + v.id + "' data-title='" + v.title + "' data-target=\"#delete-heading\"><i class=\"voyager-x\"></i></div>\n" +
+                    "</div>" +
+                    "</div>\n" +
                     "</div>\n" +
                     "</div>\n";
             });

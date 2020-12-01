@@ -27,6 +27,7 @@ class StoresTableSeeder extends Seeder
                 'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => '',
+                'server_side'           => 1,
             ])->save();
         }
 
@@ -126,6 +127,76 @@ class StoresTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($postDataType, 'feature_image');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'image',
+                'display_name' => 'Feature Image',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 3,
+                'details'      => [
+                    'resize' => [
+                        'width'  => '250',
+                        'height' => 'null',
+                    ],
+                    'quality'    => '100%',
+                    'upsize'     => true,
+                    'thumbnails' => [
+                        [
+                            'name'  => 'medium',
+                            'scale' => '50%',
+                        ],
+                        [
+                            'name'  => 'small',
+                            'scale' => '25%',
+                        ],
+                        [
+                            'name' => 'cropped',
+                            'crop' => [
+                                'width'  => '300',
+                                'height' => '250',
+                            ],
+                        ],
+                    ],
+                ],
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($postDataType, 'top_review');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'checkbox',
+                'display_name' => 'Top Review',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 3,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($postDataType, 'popular_store');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'checkbox',
+                'display_name' => 'Popular Store',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 3,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($postDataType, 'custom_keyword');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -176,6 +247,21 @@ class StoresTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'text_area',
                 'display_name' => 'First Paragraph',
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 7,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($postDataType, 'middle_paragraph');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'rich_text_box',
+                'display_name' => 'Middle Paragraph',
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,

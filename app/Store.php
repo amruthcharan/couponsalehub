@@ -23,7 +23,22 @@ class Store extends Model
 
     protected $appends = ['coupons_count'];
 
+    public function coupons()
+    {
+        return $this->hasMany(Coupon::class, 'store_id', 'id');
+    }
+
+    public function headings()
+    {
+        return $this->hasMany(Heading::class, 'store_id', 'id');
+    }
+
     public function getCouponsCountAttribute() {
-        return 10;
+        return $this->coupons()->count();
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

@@ -1,7 +1,10 @@
 <!-- Side Bar Start -->
 <div class="col-lg-4 sidebar">
-    <div class="header">
-        @include('frontend.v2.home.categories')
+    <div class="card">
+        <h4 class="card-title text-center mt-3">Popular Categories</h4>
+        <div class="header">
+            @include('frontend.v2.home.categories')
+        </div>
     </div>
 
 {{--    todo after creating store--}}

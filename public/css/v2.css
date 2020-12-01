@@ -2427,3 +2427,38 @@ h4 {
     width: 100%;
     padding: 1rem;
 }
+.u-bg-blue {
+    background: #EFF2F2;
+}
+
+#store .coupon-box {
+    border: solid black 1px;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+.coupon-text {
+    font-size: 24px;
+    color: darkblue;
+}
+
+.coupon-title {
+    font-size: 24px;
+    font-weight: 400;
+    display: inline-block;
+    line-height: 1.7;
+}
+
+.editor-pick {
+    width: 0;
+    height: 0;
+    border-top: 0 solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 40px solid #e84c3d;
+}
+
+.editor-pick i {
+    color: #fff;
+    font-size: 16px;
+    margin: 4px 0 0 -35px;
+}
