@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Site Metas -->
-    <title>{{ config('app.name') }} - @yield('title', 'home')</title>
+    <title>@yield('title', 'home')</title>
     <meta name="description" content="@yield('description')">
 
     <!-- Favicon -->

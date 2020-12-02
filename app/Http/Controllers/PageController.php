@@ -18,7 +18,7 @@ class PageController extends Controller
         $categories = Category::homepage()->take(8);
 
         if ($category = Category::whereSlug($slug)->first()) {
-            $posts = Post::published()->whereCategoryId($category->id)->with('category')->paginate(9);
+            $posts = Post::published()->whereCategoryId($category->id)->with('category')->latest('created_at')->paginate(9);
             $stores = Store::whereCategoryId($category->id)->select('slug', 'name', 'logo')->get();
             return view('frontend.' . config('nextgen.theme') . '.category.show', compact(['posts', 'category', 'categories', 'stores']));
         } elseif($page = Page::whereSlug($slug)->whereStatus(Page::STATUS_ACTIVE)->first()) {

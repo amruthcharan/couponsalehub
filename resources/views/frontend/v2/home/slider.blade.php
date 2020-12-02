@@ -3,7 +3,7 @@
         @foreach($slider as $post)
             <div class="header-slider-item">
                 <img src="{{ image($post['image']) }}" alt="{{$post['title']}}" width="685px" height="400px" />
-                <div class="header-slider-caption">
+                <div class="header-slider-caption text-center">
                     <a href="{{ route('page', $post['slug']) }}" class="u-slider-text">{{$post['title']}}</a>
                 </div>
             </div>

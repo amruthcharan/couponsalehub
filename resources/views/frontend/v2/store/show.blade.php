@@ -16,7 +16,7 @@
                                         in <a href="{{ route('page', $store->category->slug) }}" class="category-name">{{ $store->category->name }}</a>
                                         on <span>{{ $store->updated_at->format('d-M-Y') }}</span>
                                     </div>
-                                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                         MOVE TO
                                     </button>
                                     <div class="collapse" id="collapseExample">
@@ -30,12 +30,10 @@
                                         {{ $store->first_paragraph }}
                                         <div id="store">
                                             @php $coupons = $store->coupons->where('is_editor_pick', true)->where('heading_id', null)->sortBy('editor_order'); @endphp
-                                            <div class="card m-2">
-                                                <div class="card-body">
-                                                    @foreach($coupons as $coupon)
-                                                        @include('frontend.v2.store.coupon')
-                                                    @endforeach
-                                                </div>
+                                            <div class="my-2">
+                                                @foreach($coupons as $coupon)
+                                                    @include('frontend.v2.store.coupon')
+                                                @endforeach
                                             </div>
                                             <div class="py-2">
                                                 {!! $store->middle_paragraph !!}
@@ -45,12 +43,10 @@
                                                 @include('frontend.v2.store.h2')
                                             @endforeach
                                             @php $coupons = $store->coupons->where('is_editor_pick', false)->where('heading_id', null)->sortBy('editor_order'); @endphp
-                                            <div class="card m-2">
-                                                <div class="card-body">
-                                                    @foreach($coupons as $coupon)
-                                                        @include('frontend.v2.store.coupon')
-                                                    @endforeach
-                                                </div>
+                                            <div class="my-2">
+                                                @foreach($coupons as $coupon)
+                                                    @include('frontend.v2.store.coupon')
+                                                @endforeach
                                             </div>
                                         </div>
                                         {!! $store->content !!}
@@ -156,6 +152,7 @@
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
+            console.log(textArea)
 
             try {
                 var successful = document.execCommand('copy');

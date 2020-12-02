@@ -215,7 +215,7 @@ class CouponsTableSeeder extends Seeder
         $dataRow = $this->dataRow($postDataType, 'description');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'rich_text_box',
+                'type'         => 'text_area',
                 'display_name' => 'Description',
                 'required'     => 0,
                 'browse'       => 0,

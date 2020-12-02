@@ -1,3 +1,8 @@
+@if($coupon->special_message)
+<div class="pl-2 color-white" style="background: #FF6F61; border: 1px solid #FF6F61">
+    {{ $coupon->special_message }}
+</div>
+@endif
 <div class="coupon-box">
     <div class="row">
         @php
@@ -14,7 +19,7 @@
             </div>
         </div>
         <div class="col-md-7 col-xs-12 col-sm-12 my-auto border-right border-left">
-            <h3 class="text-center text-sm-left">
+            <h3 class="text-center text-sm-left mt-1">
                 <a href="{{ $url }}" rel="nofollow" class="coupon-title text-xs-center">
                     {{ $coupon->title }}
                 </a>
@@ -24,20 +29,21 @@
             </div>
         </div>
         <div class="col-md-3 col-xs-12 col-sm-12 col-lg-3 text-center pull-right my-auto">
-            <p class="col-xs-12 col-sm-12">
-                @if($coupon->id == app('request')->input('coupon'))
-                    @if($coupon->type == \App\Coupon::TYPES[0])
-                        <a rel="nofollow" href="{{ $url }}" class="btn btn-primary active" target="_blank">DEAL ACTIVATED</a>
-                    @else
-                        <a rel="nofollow" href="{{ $url }}" target="_blank">{{ $coupon->code }}</a>
-                    @endif
+            @if($coupon->id == app('request')->input('coupon'))
+                @if($coupon->type == \App\Coupon::TYPES[0])
+                    <a rel="nofollow" href="{{ $url }}" class="btn btn-primary active" target="_blank">DEAL ACTIVATED</a>
                 @else
-                    <a rel="nofollow" class="btn btn-primary" href="{{ $url }}" onclick="showCoupon({{ $coupon->id }})">
-                        {{ $coupon->type == \App\Coupon::TYPES[0] ? "GET DEAL" : "SHOW CODE" }}
-                    </a>
+                    <a rel="nofollow" href="{{ $url }}" target="_blank">{{ $coupon->code }}</a>
                 @endif
-            </p>
+            @else
+                <a rel="nofollow" class="btn btn-primary" href="{{ $url }}" onclick="showCoupon({{ $coupon->id }})">
+                    {{ $coupon->type == \App\Coupon::TYPES[0] ? "GET DEAL" : "SHOW CODE" }}
+                </a>
+            @endif
         </div>
         <div class="clearfix"></div>
     </div>
+    @if($coupon->proof_image)
+        <img src="{{ image($coupon->proof_image) }}" width="100%" alt="">
+    @endif
 </div>

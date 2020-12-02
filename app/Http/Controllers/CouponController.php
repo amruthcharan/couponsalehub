@@ -57,11 +57,7 @@ class CouponController extends VoyagerBaseController
         if (strlen($dataType->model_name) != 0) {
             $model = app($dataType->model_name);
 
-            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
-                $query = $model->{$dataType->scope}($store_id);
-            } else {
-                $query = $model::select('*');
-            }
+            $query = $model->whereStoreId($store_id);
 
             // Use withTrashed() if model uses SoftDeletes and if toggle is selected
             if ($model && in_array(SoftDeletes::class, class_uses_recursive($model)) && Auth::user()->can('delete', app($dataType->model_name))) {
@@ -93,6 +89,7 @@ class CouponController extends VoyagerBaseController
             } else {
                 $dataTypeContent = call_user_func([$query->orderBy($model->getKeyName(), 'DESC'), $getter]);
             }
+
 
             // Replace relationships' keys for labels and create READ links if a slug is provided.
             $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType);
@@ -217,9 +214,7 @@ class CouponController extends VoyagerBaseController
             if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
                 $model = $model->withTrashed();
             }
-            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
-                $model = $model->{$dataType->scope}($store->id);
-            }
+
             $dataTypeContent = call_user_func([$model, 'findOrFail'], $id);
         } else {
             // If Model doest exist, get data from table name
@@ -264,9 +259,9 @@ class CouponController extends VoyagerBaseController
         $id = $id instanceof \Illuminate\Database\Eloquent\Model ? $id->{$id->getKeyName()} : $id;
 
         $model = app($dataType->model_name);
-        if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
-            $model = $model->{$dataType->scope}($store->id);
-        }
+//        if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
+//            $model = $model->{$dataType->scope}($store->id);
+//        }
         if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
             $data = $model->withTrashed()->findOrFail($id);
         } else {

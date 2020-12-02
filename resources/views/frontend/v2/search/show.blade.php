@@ -24,9 +24,9 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="row">
+                                        <div class="col-md-12 row">
                                             @foreach($stores as $store)
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 ">
                                                     @include('frontend.v2.partials.popular-store')
                                                 </div>
                                             @endforeach
