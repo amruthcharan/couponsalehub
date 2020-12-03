@@ -3,7 +3,7 @@
         <div class="carousel-inner">
             @foreach($slider as $id => $post)
                 <div class="carousel-item {{ $id == 0 ? 'active' : '' }}">
-                    <img src="{{ image($post['image']) }}" alt="{{$post['title']}}" width="100%">
+                    <a href="{{ route('page', $post['slug']) }}"><img src="{{ image($post['image']) }}" alt="{{$post['title']}}" width="100%"></a>
                 </div>
             @endforeach
         </div>
