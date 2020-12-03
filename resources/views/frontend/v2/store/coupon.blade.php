@@ -1,5 +1,5 @@
 @if($coupon->special_message)
-<div class="pl-2 color-white" style="background: #FF6F61; border: 1px solid #FF6F61">
+<div class="pl-2 py-1 color-white" style="background: #FF6F61; border: 1px solid #FF6F61">
     {{ $coupon->special_message }}
 </div>
 @endif

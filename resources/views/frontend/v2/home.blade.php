@@ -7,7 +7,7 @@
     <div class="header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">
+                <div class="d-none d-sm-block col-md-3">
                     @include('frontend.v2.home.categories')
                 </div>
                 @include('frontend.v2.home.slider')

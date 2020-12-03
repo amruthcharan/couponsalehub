@@ -20,6 +20,9 @@
                                                     @include('frontend.v2.partials.popular-store')
                                                 </div>
                                             @endforeach
+                                            <div class="col-md-12 mt-3">
+                                                {!! $stores->links('frontend.v2.partials.pagination') !!}
+                                            </div>
 
                                         </div>
                                         @forelse($posts as $post)

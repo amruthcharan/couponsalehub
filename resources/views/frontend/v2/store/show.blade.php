@@ -6,6 +6,11 @@
     <div class="product-detail">
         <div class="container-fluid">
             <div class="row">
+                <div class="d-sm-none card mb-3">
+                    <div class="img-item">
+                        <img src="{{ image($store->logo) }}" alt="{{ $store->name }}" width="100%" class="p-3">
+                    </div>
+                </div>
                 <div class="col-lg-8">
                     <div class="row product-detail-bottom">
                         <div class="col-lg-12">
@@ -57,11 +62,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4 sidebar">
-                    <div class="card mb-3">
+                    <div class="d-none d-sm-block card mb-3">
                         <div class="header">
                             <div class="header-img">
                                 <div class="img-item m-1">
-                                    <img src="{{ image($store->logo) }}" alt="{{ $store->name }}" class="p-5">
+                                    <img src="{{ image($store->logo) }}" alt="{{ $store->name }}" class="p-3">
                                 </div>
                             </div>
                         </div>

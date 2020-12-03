@@ -1,5 +1,7 @@
 <div class="card">
-    <img class="card-img-top" src="{{ image($store['logo']) }}" alt="{{$store['name']}}">
+    <a href="{{ route('page', $store['slug']) }}">
+        <img class="card-img-top" src="{{ image($store['logo']) }}" alt="{{$store['name']}}">
+    </a>
     <div class="card-body">
         <h5 class="card-title text-center" style="font-size: 16px;">{{$store['name']}}</h5>
         <div class="text-center">
