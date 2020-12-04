@@ -21,20 +21,20 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/', 'HomeController')->name('home');
 
-Route::get('/categories', 'CategoriesPageController')->name('categories');
+Route::middleware('slashes')->group(function () {
+    Route::get('/categories', 'CategoriesPageController')->name('categories');
 
-Route::get('/guides', 'GuidesController')->name('guides');
+    Route::get('/guides', 'GuidesController')->name('guides');
 
-Route::get('/offers-and-reviews', 'ReviewsController')->name('reviews');
+    Route::get('/offers-and-reviews', 'ReviewsController')->name('reviews');
 
-Route::get('/contact-us', 'ContactController@show')->name('contact');
+    Route::get('/contact-us', 'ContactController@show')->name('contact');
 
-Route::post('/contact', 'ContactController@submit')->name('submit-contact');
+    Route::post('/contact', 'ContactController@submit')->name('submit-contact');
 
-Route::get('/search', 'SearchController@search')->name('search');
+    Route::get('/search', 'SearchController@search')->name('search');
 
-Route::resource('/headings', 'HeadingsController');
+    Route::resource('/headings', 'HeadingsController');
 
-Route::get('/{page}', 'PageController')->name('page');
-
-
+    Route::get('/{page}', 'PageController')->name('page');
+});
