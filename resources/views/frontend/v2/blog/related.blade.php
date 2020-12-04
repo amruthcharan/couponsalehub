@@ -3,9 +3,9 @@
         <h3>Related Articles</h3>
     </div>
 
-    <div class="row align-items-center product-slider product-slider-3">
+    <div class="row align-items-center">
         @foreach($related as $post)
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="product-item">
                 <div class="product-image">
                     <a href="{{ route('page', $post->slug) }}">

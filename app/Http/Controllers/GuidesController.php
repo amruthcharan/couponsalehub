@@ -9,7 +9,7 @@ class GuidesController extends Controller
 {
     public function __invoke()
     {
-        $posts = Post::published()->paginate(10);
+        $posts = Post::published()->latest('created_at')->paginate(10);
         $categories = Category::homepage()->take(8);
         return view('frontend.' . config('nextgen.theme') . '.blog.index', compact(['posts', 'categories']));
     }

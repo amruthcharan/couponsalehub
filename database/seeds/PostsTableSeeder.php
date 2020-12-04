@@ -28,6 +28,7 @@ class PostsTableSeeder extends Seeder
                 'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => '',
+                'server_side'           => 1,
             ])->save();
         }
 
@@ -56,8 +57,8 @@ class PostsTableSeeder extends Seeder
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
+                'edit'         => 1,
+                'add'          => 1,
                 'delete'       => 0,
                 'order'        => 2,
             ])->save();
@@ -248,8 +249,8 @@ class PostsTableSeeder extends Seeder
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
+                'edit'         => 1,
+                'add'          => 1,
                 'delete'       => 0,
                 'order'        => 12,
             ])->save();
@@ -317,7 +318,7 @@ class PostsTableSeeder extends Seeder
                     "column"      => "author_id",
                     "key"         => "id",
                     "label"       => "name",
-                    "pivot_table" => "categories",
+                    "pivot_table" => "users",
                     "pivot"       => "0",
                     "taggable"    => "0"
                 ],

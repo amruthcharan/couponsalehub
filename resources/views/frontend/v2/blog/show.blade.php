@@ -2,6 +2,8 @@
 
 @section('title', $post->seo_title ?? $post->title)
 @section('description', $post->meta_description ?? $post->excerpt)
+@section('created', $post->created_at->format('Y-m-d\TH:m:sP'))
+@section('updated', $post->updated_at->format('Y-m-d\Th:m:sP'))
 
 @section('body')
     <div class="product-detail">

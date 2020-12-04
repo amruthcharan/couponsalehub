@@ -21,6 +21,10 @@ class VoyagerDummyDatabaseSeeder extends Seeder
         $this->seed('UsersTableSeeder');
         $this->seed('PostsTableSeeder');
         $this->seed('PagesTableSeeder');
+        $this->seed('StoresTableSeeder');
+        $this->seed('HeadingsTableSeeder');
+        $this->seed('CouponsTableSeeder');
+        $this->seed('StoreDataSeeder');
         $this->seed('RedirectsTableSeeder');
         $this->seed('TranslationsTableSeeder');
         $this->seed('PermissionRoleTableSeeder');

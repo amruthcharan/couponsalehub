@@ -1,12 +1,19 @@
 <div class="col-md-6">
-    <div class="header-slider normal-slider">
-        @foreach($slider as $post)
-            <div class="header-slider-item">
-                <img src="{{ image($post['image']) }}" alt="{{$post['title']}}" width="685px" height="400px" />
-                <div class="header-slider-caption">
-                    <a href="{{ route('page', $post['slug']) }}" class="u-slider-text">{{$post['title']}}</a>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach($slider as $id => $post)
+                <div class="carousel-item {{ $id == 0 ? 'active' : '' }}">
+                    <a href="{{ route('page', $post['slug']) }}"><img src="{{ image($post['image']) }}" alt="{{$post['title']}}" width="100%"></a>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </div>
