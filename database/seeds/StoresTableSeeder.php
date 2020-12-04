@@ -340,8 +340,8 @@ class StoresTableSeeder extends Seeder
                 'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
+                'edit'         => 1,
+                'add'          => 1,
                 'delete'       => 0,
                 'order'        => 12,
             ])->save();

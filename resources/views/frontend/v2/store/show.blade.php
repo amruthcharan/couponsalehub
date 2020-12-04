@@ -1,12 +1,14 @@
 @extends('frontend.layouts.v2')
 
 @section('title', $store->seo_title ?? $store->name)
-@section('description', $store->seo_description ?? $post->name)
+@section('description', $store->seo_description ?? $store->name)
+@section('created', $store->created_at->format('Y-m-d\Th:m:sP'))
+@section('updated', $store->updated_at->format('Y-m-d\Th:m:sP'))
 @section('body')
     <div class="product-detail">
         <div class="container-fluid">
             <div class="row">
-                <div class="d-sm-none card mb-3">
+                <div class="d-sm-none card mb-3 mx-auto">
                     <div class="img-item">
                         <img src="{{ image($store->logo) }}" alt="{{ $store->name }}" width="100%" class="p-3">
                     </div>

@@ -2,6 +2,8 @@
 
 @section('title', $page->meta_title)
 @section('description', $page->meta_description)
+@section('created', $page->created_at->format('Y-m-d\Th:m:sP'))
+@section('updated', $page->updated_at->format('Y-m-d\Th:m:sP'))
 
 @section('body')
     <div class="product-detail">

@@ -8,6 +8,8 @@
     <!-- Site Metas -->
     <title>@yield('title', 'home')</title>
     <meta name="description" content="@yield('description')">
+    <meta property="article:published_time" content="@yield('created')" />
+    <meta property="article:modified_time" content="@yield('updated')" />
 
     <!-- Favicon -->
     <link href="{{ image(setting('site.favicon')) }}" rel="icon">
@@ -18,8 +20,8 @@
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="{{ asset('css/slick.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/slick-theme.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/v2.css') }}" rel="stylesheet">
