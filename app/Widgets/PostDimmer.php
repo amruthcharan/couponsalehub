@@ -2,12 +2,13 @@
 
 namespace App\Widgets;
 
+use App\Store;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
+use TCG\Voyager\Models\Post;
 use TCG\Voyager\Widgets\BaseDimmer;
 
-class CategoryDimmer extends BaseDimmer
+class PostDimmer extends BaseDimmer
 {
     /**
      * The configuration array.
@@ -22,8 +23,8 @@ class CategoryDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Voyager::model('Category')->count();
-        $string = "categories";
+        $count = Post::count();
+        $string = "posts";
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-list',
@@ -31,7 +32,7 @@ class CategoryDimmer extends BaseDimmer
             'text'   => "",
             'button' => [
                 'text' => "View all $string",
-                'link' => route('voyager.categories.index'),
+                'link' => route('voyager.posts.index'),
             ],
             'image' => voyager_asset('images/widget-backgrounds/02.jpg'),
         ]));
@@ -44,6 +45,6 @@ class CategoryDimmer extends BaseDimmer
      */
     public function shouldBeDisplayed()
     {
-        return Auth::user()->can('browse', Voyager::model('Category'));
+        return Auth::user()->can('browse', Voyager::model('Post'));
     }
 }
