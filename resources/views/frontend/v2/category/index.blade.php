@@ -34,6 +34,7 @@
                         </div>
                     </div>
                 </div>
+                @php $categories = $categories->where('homepage', true); @endphp
                 @include('frontend.v2.partials.sidebar')
             </div>
         </div>

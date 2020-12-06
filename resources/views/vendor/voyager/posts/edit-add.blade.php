@@ -181,6 +181,14 @@
                                     {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "slug") !!}
                                     value="{{ $dataTypeContent->slug ?? '' }}">
                             </div>
+                            @php
+                                $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
+                                $row = $dataTypeRows->where('field', 'created_at')->first();
+                            @endphp
+                            <div class="form-group">
+                                <label for="created_at">Created At</label>
+                                {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
+                            </div>
                             <div class="form-group">
                                 <label for="status">{{ __('voyager::post.status') }}</label>
                                 <select class="form-control" name="status">
