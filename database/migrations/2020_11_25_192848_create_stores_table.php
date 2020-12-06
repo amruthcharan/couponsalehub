@@ -32,7 +32,6 @@ class CreateStoresTable extends Migration
             $table->string('seo_description');
             $table->string('seo_keywords')->nullable();
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

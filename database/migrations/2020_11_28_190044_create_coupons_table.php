@@ -30,8 +30,6 @@ class CreateCouponsTable extends Migration
             $table->string('coupon_text');
             $table->string('special_message')->nullable();
             $table->timestamps();
-            $table->foreign('store_id')->references('id')->on('stores');
-            $table->foreign('heading_id')->references('id')->on('headings');
         });
     }
 
