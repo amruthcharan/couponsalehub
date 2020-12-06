@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-5 col-md-6">
                 <div class="footer-widget">
-                    <h2>About Us</h2>
+                    <h4>About Us</h4>
                     <div class="contact-info">
                         <p>OffersnReviews is one amongst the best online coupons and reviews website. We provide great deals for about 10,000 stores with working coupons and update them daily.</p>
                         <a href="{{ route('page', 'about-us') }}" class="btn btn-sm">Read more</a>
@@ -17,7 +17,7 @@
 
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h2>Important Links</h2>
+                    <h4>Important Links</h4>
                     <ul>
                         <li><a href="{{ route('categories') }}">Categories</a></li>
                         <li><a href="{{ route('page', 'privacy-policy') }}">Privacy Policy</a></li>
@@ -29,7 +29,7 @@
 
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h2>Follow Us</h2>
+                    <h4>Follow Us</h4>
                     <div class="contact-info">
                         <div class="social">
                             <a href="https://www.facebook.com/offersnreviews"><i class="fab fa-facebook-f"></i></a>

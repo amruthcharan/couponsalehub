@@ -22,7 +22,7 @@ class SearchController extends Controller
         $stores = Store::where('name', 'like', '%'. $search .'%')
                         ->orWhereIn('category_id', $cats)
                         ->select('name', 'slug', 'logo')
-                        ->get();
+                        ->paginate(10, [], 'stores');
         return view('frontend.' . config('nextgen.theme') . '.search.show', compact(['search', 'posts', 'categories', 'stores']));
     }
 }
