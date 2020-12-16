@@ -1,4 +1,4 @@
-<div class="u-bg-white p-3">
+<div class="p-3">
     <h2 class="mb-3 text-center">Popular Stores</h2>
     <div class="row">
         @foreach($popular as $store)
