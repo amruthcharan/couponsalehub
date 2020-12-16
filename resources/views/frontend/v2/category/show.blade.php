@@ -1,6 +1,6 @@
 @extends('frontend.layouts.v2')
 
-@section('title', $category->seo_title)
+@section('title', $category->meta_title)
 @section('description', $category->meta_description)
 
 @section('body')

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.v2')
 
-@section('title', setting('reviews.title') ?? "Offers and Reviews")
-@section('description', setting('reviews.description'))
+@section('title', setting('site.reviews-title') ?? "Offers and Reviews")
+@section('description', setting('site.reviews-description'))
 
 @section('body')
     <div class="header">

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card my-2">
     <a href="{{ route('page', $store['slug']) }}">
         <img class="card-img-top" src="{{ image($store['logo']) }}" alt="{{$store['name']}}">
     </a>

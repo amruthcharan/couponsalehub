@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/', 'HomeController')->name('home');
-
+Route::get('/{test}/{test2}', 'PageController')->middleware('redirectIfPossible');
 Route::middleware('slashes')->group(function () {
     Route::get('/categories', 'CategoriesPageController')->name('categories');
 
