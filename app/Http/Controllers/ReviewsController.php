@@ -10,8 +10,7 @@ class ReviewsController extends Controller
 {
     public function __invoke()
     {
-        $top = Store::whereTopReview(true)->select('slug', 'feature_image', 'name')->latest('updated_at')->paginate(8, [], 'top');
-        $popular = Store::wherePopularStore(true)->select('slug', 'logo', 'name')->latest('updated_at')->paginate(12, [], 'popular');
-        return view('frontend.' . config('nextgen.theme') . '.reviews.index', compact(['top', 'popular']));
+        $stores = Store::select('slug', 'feature_image', 'name')->latest('updated_at')->paginate(16);
+        return view('frontend.' . config('nextgen.theme') . '.reviews.index', compact('stores'));
     }
 }

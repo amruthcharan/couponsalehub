@@ -21,7 +21,7 @@ class trailingSlashes
         {
             if (!preg_match('/\?/', $request->getRequestUri())) {
                 $base_url = Config::get('app.url');
-                return Redirect::to($base_url . $request->getRequestUri() . '/');
+                return Redirect::to($base_url . $request->getRequestUri() . '/', 301);
             }
         }
         return $next($request);

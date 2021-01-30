@@ -7,7 +7,7 @@
     <div class="product-detail">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <div class="row product-detail-bottom">
                         <div class="col-lg-12">
                             <div class="tab-content">

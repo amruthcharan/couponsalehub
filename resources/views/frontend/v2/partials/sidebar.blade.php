@@ -1,5 +1,5 @@
 <!-- Side Bar Start -->
-<div class="col-lg-4 sidebar">
+<div class="col-lg-3 sidebar">
     <div class="card">
         <h4 class="card-title text-center mt-3">Popular Categories</h4>
         <div class="header">

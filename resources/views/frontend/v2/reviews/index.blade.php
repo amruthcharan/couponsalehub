@@ -7,16 +7,18 @@
     <div class="header">
         <div class="container-fluid">
             <div class="u-bg-white">
-                @include('frontend.v2.home.top-reviews')
-                <div class="col-md-12 py-2">
-                    {!! $top->links('frontend.v2.partials.pagination') !!}
+                <div class="p-3">
+                    <h1 class="mb-3 text-center">Offers and Reviews</h1>
+                    <div class="row">
+                        @foreach($stores as $store)
+                            <div class="col-md-3">
+                                @include('frontend.v2.partials.top-review')
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-
-            </div>
-            <div class="u-bg-white">
-                @include('frontend.v2.home.popular-stores')
                 <div class="col-md-12 py-2">
-                    {!! $popular->links('frontend.v2.partials.pagination') !!}
+                    {!! $stores->links('frontend.v2.partials.pagination') !!}
                 </div>
             </div>
         </div>

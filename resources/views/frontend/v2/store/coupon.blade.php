@@ -44,6 +44,6 @@
         <div class="clearfix"></div>
     </div>
     @if($coupon->proof_image)
-        <img src="{{ image($coupon->proof_image) }}" width="100%" alt="">
+        <img src="{{ image($coupon->proof_image) }}" width="100%" alt="{{$coupon->title}}">
     @endif
 </div>

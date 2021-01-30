@@ -1,6 +1,6 @@
 @extends('frontend.layouts.v2')
 
-@section('title', $store->seo_title ?? $store->name)
+@section('title', $store->seo_title . " " . now()->format('Y') ?? $store->name)
 @section('description', $store->seo_description ?? $store->name)
 @section('created', $store->created_at->format('Y-m-d\Th:m:sP'))
 @section('updated', $store->updated_at->format('Y-m-d\Th:m:sP'))
@@ -13,7 +13,7 @@
                         <img src="{{ image($store->logo) }}" alt="{{ $store->name }}" width="100%" class="p-3">
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <div class="row product-detail-bottom">
                         <div class="col-lg-12">
                             <div class="tab-content">
@@ -23,18 +23,8 @@
                                         in <a href="{{ route('page', $store->category->slug) }}" class="category-name">{{ $store->category->name }}</a>
                                         on <span>{{ $store->updated_at->format('d-M-Y') }}</span>
                                     </div>
-                                    <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                        MOVE TO
-                                    </button>
-                                    <div class="collapse" id="collapseExample">
-                                        <div class="card card-body">
-                                            @foreach($store->headings->sortBy('order')->pluck('title', 'id') as $id => $title)
-                                            <a href="#{{ $id }}">{{ $title }}</a>
-                                            @endforeach
-                                        </div>
-                                    </div>
                                     <div class="post-body">
-                                        {{ $store->first_paragraph }}
+                                        <div class="pb-2">{{ $store->first_paragraph }}</div>
                                         <div id="store">
                                             @php $coupons = $store->coupons->where('is_editor_pick', true)->where('heading_id', null)->sortBy('editor_order'); @endphp
                                             <div class="my-2">
@@ -63,14 +53,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 sidebar">
+                <div class="col-lg-3 sidebar">
                     <div class="d-none d-sm-block card mb-3">
                         <div class="header">
                             <div class="header-img">
                                 <div class="img-item m-1">
-                                    <img src="{{ image($store->logo) }}" alt="{{ $store->name }}" class="p-3">
+                                    <img src="{{Voyager::image($store->thumbnail('cropped', 'logo'))}}" alt="{{ $store->name }}" class="p-3">
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <h4 class="card-title text-center mt-3">Quick Links</h4>
+                        <div class="card-body pt-0">
+                            @foreach($store->headings->sortBy('order')->pluck('title', 'id') as $id => $title)
+                                <a class="d-block" href="#{{ $id }}">{{ $title }}</a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="card">

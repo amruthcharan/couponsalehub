@@ -20,7 +20,9 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/', 'HomeController')->name('home');
+Route::resource('/headings', 'HeadingsController');
 Route::get('/{test}/{test2}', 'PageController')->middleware('redirectIfPossible');
+
 Route::middleware('slashes')->group(function () {
     Route::get('/categories', 'CategoriesPageController')->name('categories');
 
@@ -35,7 +37,6 @@ Route::middleware('slashes')->group(function () {
     Route::get('/{page}', 'PageController')->name('page');
 });
 
-Route::resource('/headings', 'HeadingsController');
 
 Route::post('/contact', 'ContactController@submit')->name('submit-contact');
 

@@ -7,24 +7,24 @@
     <div class="product-detail">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <div class="row product-detail-bottom">
                         <div class="col-lg-12">
                             <div class="tab-content">
                                 <div class="container">
                                     <h1>{{ $category->name }}</h1>
-                                    <div class="row post-body">
+                                    <div class="post-body">
                                         <div class="row">
                                             @foreach($stores as $store)
                                                 <div class="col-md-3">
                                                     @include('frontend.v2.partials.popular-store')
                                                 </div>
                                             @endforeach
-                                            <div class="col-md-12 mt-3">
-                                                {!! $stores->links('frontend.v2.partials.pagination') !!}
-                                            </div>
-
                                         </div>
+                                        <div class="col-md-12 mt-3">
+                                            {!! $stores->links('frontend.v2.partials.pagination') !!}
+                                        </div>
+
                                         @forelse($posts as $post)
                                             <div class="blog-box row m-3">
                                                 <div class="col-md-4">

@@ -30,4 +30,7 @@ mix.scripts([
     'resources/js/v2/easing.min.js',
     'resources/js/v2/v2.js',
 ], 'public/js/v2.js')
+    .styles([
+        'resources/css/v2/v2.css',
+    ], 'public/css/v2.css')
 .copy('resources/js/voyager_additional.js', 'public/js');
