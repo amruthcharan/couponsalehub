@@ -2,6 +2,9 @@
 
 @section('title', setting('site.reviews-title') ?? "Offers and Reviews")
 @section('description', setting('site.reviews-description'))
+@section('canonical')
+    <link rel="canonical" href="https://offersnreviews.com/offers-and-reviews/" />
+@endsection
 
 @section('body')
     <div class="header">
