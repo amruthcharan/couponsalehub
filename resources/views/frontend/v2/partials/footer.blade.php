@@ -7,7 +7,7 @@
                 <div class="footer-widget">
                     <h4>About Us</h4>
                     <div class="contact-info">
-                        <p>OffersnReviews is one amongst the best online coupons and reviews website. We provide great deals for about 10,000 stores with working coupons and update them daily.</p>
+                        <p>{{ setting('site.about-us') }}</p>
                         <a href="{{ route('page', 'about-us') }}" class="btn btn-sm">Read more</a>
                     </div>
                 </div>
