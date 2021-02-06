@@ -7,7 +7,7 @@
                 <div class="footer-widget">
                     <h4>About Us</h4>
                     <div class="contact-info">
-                        <p>{{ setting('site.about-us') }}</p>
+                        <p>{{ setting('site.about_us') }}</p>
                         <a href="{{ route('page', 'about-us') }}" class="btn btn-sm">Read more</a>
                     </div>
                 </div>
