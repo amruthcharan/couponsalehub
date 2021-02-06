@@ -32,9 +32,9 @@
                     <h4>Follow Us</h4>
                     <div class="contact-info">
                         <div class="social">
-                            <a href="https://www.facebook.com/offersnreviews"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/OffersNReviews1"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/offersnreviews/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com//"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
