@@ -23,7 +23,7 @@ Route::get('/', 'HomeController')->name('home');
 Route::resource('/headings', 'HeadingsController');
 Route::get('/{test}/{test2}', 'PageController')->middleware('redirectIfPossible');
 
-Route::middleware('slashes')->group(function () {
+Route::group(function () {
     Route::get('/categories', 'CategoriesPageController')->name('categories');
 
     Route::get('/guides', 'GuidesController')->name('guides');
