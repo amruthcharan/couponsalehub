@@ -23,7 +23,7 @@ Route::get('/', 'HomeController')->name('home');
 Route::resource('/headings', 'HeadingsController');
 Route::get('/{test}/{test2}', 'PageController')->middleware('redirectIfPossible');
 
-Route::group(function () {
+
     Route::get('/categories', 'CategoriesPageController')->name('categories');
 
     Route::get('/guides', 'GuidesController')->name('guides');
@@ -35,7 +35,6 @@ Route::group(function () {
     Route::get('/search', 'SearchController@search')->name('search');
 
     Route::get('/{page}', 'PageController')->name('page');
-});
 
 
 Route::post('/contact', 'ContactController@submit')->name('submit-contact');
