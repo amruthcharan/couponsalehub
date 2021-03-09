@@ -197,6 +197,21 @@ class StoresTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($postDataType, 'is_enabled');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'checkbox',
+                'display_name' => 'Publish',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 0,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 3,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($postDataType, 'custom_keyword');
         if (!$dataRow->exists) {
             $dataRow->fill([

@@ -179,7 +179,7 @@ class CouponController extends VoyagerBaseController
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows)->validate();
         $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
-
+        Store::where('id', $request->store_id)->update(['updated_at' => now()]);
         event(new BreadDataAdded($dataType, $data));
 
         if (!$request->has('_tagging')) {
@@ -274,7 +274,7 @@ class CouponController extends VoyagerBaseController
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->editRows, $dataType->name, $id)->validate();
         $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
-
+        Store::where('id', $request->store_id)->update(['updated_at' => now()]);
         event(new BreadDataUpdated($dataType, $data));
 
         if (auth()->user()->can('browse', app($dataType->model_name))) {

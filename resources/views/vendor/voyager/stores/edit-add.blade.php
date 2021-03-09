@@ -157,6 +157,34 @@
                             {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                         </div>
                     </div>
+
+                    <!-- ### SEO CONTENT ### -->
+                    <div class="panel panel-bordered panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="icon wb-search"></i> SEO Content</h3>
+                            <div class="panel-actions">
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="seo_title">SEO Title</label>
+                                @include('voyager::multilingual.input-hidden', [
+                                    '_field_name'  => 'seo_title',
+                                    '_field_trans' => 'seo_title'
+                                ])
+                                <input type="text" required class="form-control" name="seo_title" placeholder="SEO Title" value="{{ $dataTypeContent->seo_title ?? '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_description">SEO Description</label>
+                                @include('voyager::multilingual.input-hidden', [
+                                    '_field_name'  => 'seo_description',
+                                    '_field_trans' => 'seo_description'
+                                ])
+                                <textarea class="form-control" required name="seo_description">{{ $dataTypeContent->seo_description ?? '' }}</textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <!-- ### IMAGE ### -->
@@ -218,33 +246,10 @@
                                 <input type="checkbox" {{ $dataTypeContent->top_review ? "checked" : "" }} class="form-check-input" name="top_review" id="top_review">
                                 <label class="form-check-label" for="top_review">Top Review</label>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- ### SEO CONTENT ### -->
-                    <div class="panel panel-bordered panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-search"></i> SEO Content</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label for="seo_title">SEO Title</label>
-                                @include('voyager::multilingual.input-hidden', [
-                                    '_field_name'  => 'seo_title',
-                                    '_field_trans' => 'seo_title'
-                                ])
-                                <input type="text" required class="form-control" name="seo_title" placeholder="SEO Title" value="{{ $dataTypeContent->seo_title ?? '' }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="meta_description">SEO Description</label>
-                                @include('voyager::multilingual.input-hidden', [
-                                    '_field_name'  => 'seo_description',
-                                    '_field_trans' => 'seo_description'
-                                ])
-                                <textarea class="form-control" required name="seo_description">{{ $dataTypeContent->seo_description ?? '' }}</textarea>
+                            <div class="form-check">
+                                <input type="checkbox" {{ $dataTypeContent->is_enabled ? "checked" : "" }} class="form-check-input" name="is_enabled" id="is_enabled">
+                                <label class="form-check-label" for="is_enabled">Publish</label>
                             </div>
                         </div>
                     </div>

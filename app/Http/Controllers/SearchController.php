@@ -21,6 +21,7 @@ class SearchController extends Controller
         $categories = Category::homepage();
         $stores = Store::where('name', 'like', '%'. $search .'%')
                         ->orWhereIn('category_id', $cats)
+                        ->published()
                         ->select('name', 'slug', 'logo')
                         ->paginate(10, [], 'stores');
         return view('frontend.' . config('nextgen.theme') . '.search.show', compact(['search', 'posts', 'categories', 'stores']));

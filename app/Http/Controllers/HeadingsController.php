@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Heading;
+use App\Store;
 use Illuminate\Http\Request;
 
 class HeadingsController extends Controller
@@ -41,6 +42,7 @@ class HeadingsController extends Controller
             'order'       => $request->input('order'),
             'store_id'    => $request->input('store_id')
         ]);
+        Store::where('id', $request->store_id)->update(['updated_at' => now()]);
         return response(Heading::whereStoreId($request->input('store_id'))->orderBy('order')->get());
     }
 
@@ -80,6 +82,8 @@ class HeadingsController extends Controller
                 'description' => $request->input('description'),
                 'order'       => $request->input('order'),
             ]);
+        Store::where('id', $request->store_id)->update(['updated_at' => now()]);
+
         return response(Heading::whereStoreId($request->input('store_id'))->orderBy('order')->get());
     }
 

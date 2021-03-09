@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use TCG\Voyager\Traits\Resizable;
 
@@ -21,7 +22,8 @@ class Store extends Model
         'seo_title',
         'seo_description',
         'seo_keywords',
-        'logo'
+        'logo',
+        'is_enabled'
     ];
 
     protected $appends = ['coupons_count'];
@@ -43,5 +45,10 @@ class Store extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function scopePublished(Builder $builder)
+    {
+        return $builder->where('is_enabled', true);
     }
 }
