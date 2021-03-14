@@ -84,7 +84,7 @@
                         <div class="panel-body">
                             @php
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                                $exclude = ['logo', 'slug', 'seo_description', 'seo_keywords', 'seo_title', 'post_belongsto_category_relationship', 'content', 'feature_image', 'top_review', 'popular_store', 'middle_paragraph'];
+                                $exclude = ['logo', 'slug', 'seo_description', 'seo_keywords', 'seo_title', 'post_belongsto_category_relationship', 'content', 'feature_image', 'top_review', 'popular_store', 'middle_paragraph', 'is_enabled'];
                             @endphp
 
                             @foreach($dataTypeRows as $row)
