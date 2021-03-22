@@ -4,7 +4,10 @@
     </a>
     <div class="card-body">
         <div class="text-center">
-            <a href="{{ route('page', $post['slug']) }}">{{ $post['title'] }}</a>
+            <p>
+                {{ substr($post['excerpt'], 0, 70) }}...
+                <a href="{{ route('page', $post['slug']) }}">read more</a>
+            </p>
         </div>
     </div>
 </div>

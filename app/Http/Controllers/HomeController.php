@@ -11,9 +11,10 @@ class HomeController extends Controller
     public function __invoke()
     {
         $categories = Category::homepage()->take(8);
-        $posts = Post::published()->select('slug', 'image', 'title')->latest('updated_at')->take(8)->get()->toArray();
-        $right = array_slice($posts,0,2);
-        $slider = array_slice($posts,2, 4);
+        $articles = Post::published()->select('slug', 'image', 'excerpt', 'title')->latest('updated_at')->take(14)->get()->toArray();
+        $right = array_slice($articles,0,2);
+        $slider = array_slice($articles,2, 4);
+        $posts = array_slice($articles,4, 14);
         $top = Store::published()->whereTopReview(true)->select('slug', 'feature_image', 'name')->latest('updated_at')->take(8)->get()->toArray();
         $popular = Store::published()->wherePopularStore(true)->select('slug', 'logo', 'name')->latest('updated_at')->take(12)->get()->toArray();
         return view('frontend.' . config('nextgen.theme') . '.home', compact(['right', 'slider', 'categories', 'top', 'popular', 'posts']));
