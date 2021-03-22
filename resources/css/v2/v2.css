@@ -127,6 +127,22 @@ h4 {
     box-shadow: none;
 }
 
+
+#coupon .btn {
+    color: white;
+    background: red;
+    font-weight: bold;
+    border: 1px solid red;
+}
+
+#coupon .btn:hover,
+#coupon .btn:active,
+#coupon .btn:focus {
+    color: red;
+    background: white;
+    box-shadow: none;
+}
+
     /**********************************/
 /*********** Nav Bar CSS **********/
 /**********************************/
@@ -2357,6 +2373,7 @@ h4 {
     font-weight: 700;
     display: inline-block;
     line-height: 1.7;
+    color: #00008b;
 }
 
 .editor-pick {
@@ -2371,4 +2388,8 @@ h4 {
     color: #fff;
     font-size: 16px;
     margin: 4px 0 0 -35px;
+}
+
+.post-body img {
+    width: 100%;
 }

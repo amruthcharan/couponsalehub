@@ -6,4 +6,10 @@ function tinymce_init_callback(editor)
             {title: 'No Follow', value: 'nofollow'},
             {title: 'Do Follow', value: ''}
         ];
+
+    editor.settings.link_class_list =
+        [
+            {title: 'Button', value: 'btn btn-primary'},
+            {title: 'Normal', value: ''}
+        ];
 }
