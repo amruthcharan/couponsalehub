@@ -6,7 +6,7 @@
 @section('updated', $post->updated_at->format('Y-m-d\Th:m:sP'))
 
 @section('body')
-    <div class="product-detail" id="coupon">
+    <div class="product-detail">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9">

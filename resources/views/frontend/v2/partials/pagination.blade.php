@@ -7,8 +7,11 @@
                     <a class="page-link" href="#" tabindex="-1">Previous</a>
                 </li>
             @else
+                @section('prev')
+                    <link rel="prev" href="{{ $paginator->previousPageUrl() }}" />
+                @endsection
                 <li class="page-item">
-                    <a class="page-link" rel="prev" href="{{ $paginator->previousPageUrl() }}" tabindex="-1">Previous</a>
+                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" tabindex="-1">Previous</a>
                 </li>
             @endif
 
@@ -29,8 +32,11 @@
 
             @if ($paginator->hasMorePages())
                 <li class="page-item">
-                    <a class="page-link" rel="next" href="{{ $paginator->nextPageUrl() }}">Next</a>
+                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}">Next</a>
                 </li>
+                @section('next')
+                    <link rel="next" href="{{ $paginator->nextPageUrl() }}" />
+                @endsection
             @else
                 <li class="page-item disabled">
                     <a class="page-link" href="#">Next</a>

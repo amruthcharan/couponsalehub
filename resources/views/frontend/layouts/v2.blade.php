@@ -14,6 +14,8 @@
     <!-- Favicon -->
     <link href="{{ image(setting('site.favicon')) }}" rel="icon">
     @yield('canonical')
+    @yield('prev')
+    @yield('next')
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

@@ -3,7 +3,7 @@
     {{ $coupon->special_message }}
 </div>
 @endif
-<div class="coupon-box" id="coupon">
+<div class="coupon-box">
     <div class="row">
         @php
             $url = $coupon->affiliate_url ?? $store->affiliate_url ?? $store->website_url;
