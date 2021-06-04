@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
                 'password'       => bcrypt('password'),
                 'remember_token' => Str::random(60),
                 'role_id'        => $role->id,
-                'bio'            => 'OffersnReviews is one amongst the best online coupons and reviews website. We provide great deals for about 10,000 stores with working coupons and update them daily.'
+                'bio'            => 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.'
             ]);
         }
     }

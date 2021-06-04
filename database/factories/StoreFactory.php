@@ -17,11 +17,10 @@ $factory->define(Store::class, function (Faker $faker) {
         'feature_image'    => "posts/post" . rand(1,4) .".jpg",
         'custom_keyword'   => 'Discount Code',
         'website_url'      => 'https://'.$faker->domainName,
-        'content'          => $faker->paragraphs(rand(3,5),true),
-        'first_paragraph'  => $faker->paragraph(3),
         'top_review'       => 1,
         'popular_store'    => 1,
         'seo_title'        => $faker->sentence(4),
         'seo_description'  => $faker->sentence(8),
+        'is_enabled'       => true,
     ];
 });

@@ -38,6 +38,11 @@ class Store extends Model
         return $this->hasMany(Heading::class, 'store_id', 'id');
     }
 
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class, 'store_id', 'id');
+    }
+
     public function getCouponsCountAttribute() {
         return $this->coupons()->count();
     }

@@ -1,9 +1,9 @@
-<div class="col-md-6">
+<div class="col-md-9">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            @foreach($slider as $id => $post)
+            @foreach($slides as $id => $slide)
                 <div class="carousel-item {{ $id == 0 ? 'active' : '' }}">
-                    <a href="{{ route('page', $post['slug']) }}"><img src="{{ image($post['image']) }}" alt="{{$post['title']}}" width="100%"></a>
+                    <a href="{{ $slide['link'] }}"><img src="{{ image($slide['image']) }}" alt="{{$slide['description']}}" height="400px"></a>
                 </div>
             @endforeach
         </div>

@@ -7,7 +7,7 @@
                 <div class="footer-widget">
                     <h4>About Us</h4>
                     <div class="contact-info">
-                        <p>OffersnReviews is one amongst the best online coupons and reviews website. We provide great deals for about 10,000 stores with working coupons and update them daily.</p>
+                        <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
                         <a href="{{ route('page', 'about-us') }}" class="btn btn-sm">Read more</a>
                     </div>
                 </div>
@@ -32,9 +32,9 @@
                     <h4>Follow Us</h4>
                     <div class="contact-info">
                         <div class="social">
-                            <a href="https://www.facebook.com/offersnreviews"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/OffersNReviews1"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/offersnreviews/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>

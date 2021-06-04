@@ -257,51 +257,6 @@ class StoresTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($postDataType, 'first_paragraph');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
-                'display_name' => 'First Paragraph',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'middle_paragraph');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'rich_text_box',
-                'display_name' => 'Middle Paragraph',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'content');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'rich_text_box',
-                'display_name' => 'Content',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => 8,
-            ])->save();
-        }
-
         $dataRow = $this->dataRow($postDataType, 'seo_title');
         if (!$dataRow->exists) {
             $dataRow->fill([

@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/', 'HomeController')->name('home');
 Route::resource('/headings', 'HeadingsController');
+Route::resource('/faqs', 'FaqsController');
 Route::get('/{test}/{test2}', 'PageController')->middleware('redirectIfPossible');
 
 

@@ -24,16 +24,12 @@
                                         on <span>{{ $store->updated_at->format('d-M-Y') }}</span>
                                     </div>
                                     <div class="post-body">
-                                        <div class="pb-2">{{ $store->first_paragraph }}</div>
                                         <div id="store">
                                             @php $coupons = $store->coupons->where('is_editor_pick', true)->where('heading_id', null)->sortBy('editor_order'); @endphp
                                             <div class="my-2">
                                                 @foreach($coupons as $coupon)
                                                     @include('frontend.v2.store.coupon')
                                                 @endforeach
-                                            </div>
-                                            <div class="py-2">
-                                                {!! $store->middle_paragraph !!}
                                             </div>
                                             @php $headings = $store->headings->sortBy('order'); @endphp
                                             @foreach($headings as $heading)
@@ -45,8 +41,16 @@
                                                     @include('frontend.v2.store.coupon')
                                                 @endforeach
                                             </div>
+                                            <div class="my-2">
+                                                @php $faqs = $store->faqs->sortBy('order'); @endphp
+                                                @if (count($faqs) > 0)
+                                                    <h2>Frequently Asked Questions</h2>
+                                                    @foreach ($faqs as $faq)
+                                                        @include('frontend.v2.store.faq')                                                    
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                         </div>
-                                        {!! $store->content !!}
                                     </div>
                                 </div>
                             </div>

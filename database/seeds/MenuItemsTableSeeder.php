@@ -174,6 +174,22 @@ class MenuItemsTableSeeder extends Seeder
             ])->save();
         }
 
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => 'Slides',
+            'url'     => '',
+            'route'   => 'voyager.slides.index',
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => 'voyager-images',
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => 14,
+            ])->save();
+        }
+
         $menu2 = Menu::where('name', 'main-nav')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu2->id,

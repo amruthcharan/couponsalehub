@@ -34,7 +34,7 @@ class PageController extends Controller
                 }]);
             }, 'coupons' => function ($q) {
                 $q->active();
-            }])->first()) {
+            }, 'faqs'])->first()) {
             $selected = Coupon::with('store')->find(request('coupon'));
             return view('frontend.' . config('nextgen.theme') . '.store.show', compact(['store', 'categories', 'selected']));
         } else {

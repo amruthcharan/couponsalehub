@@ -11,13 +11,9 @@
                     @include('frontend.v2.home.categories')
                 </div>
                 @include('frontend.v2.home.slider')
-                @include('frontend.v2.home.right-posts')
             </div>
             <div class="u-bg-white">
                 @include('frontend.v2.home.latest-posts')
-            </div>
-            <div class="u-bg-white">
-                @include('frontend.v2.home.top-reviews')
             </div>
             <div class="u-bg-white">
                 @include('frontend.v2.home.popular-stores')

@@ -84,7 +84,7 @@
                         <div class="panel-body">
                             @php
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                                $exclude = ['logo', 'slug', 'seo_description', 'seo_keywords', 'seo_title', 'post_belongsto_category_relationship', 'content', 'feature_image', 'top_review', 'popular_store', 'middle_paragraph', 'is_enabled'];
+                                $exclude = ['logo', 'slug', 'seo_description', 'seo_keywords', 'seo_title', 'post_belongsto_category_relationship', 'feature_image', 'top_review', 'popular_store', 'is_enabled'];
                             @endphp
 
                             @foreach($dataTypeRows as $row)
@@ -114,50 +114,81 @@
                             @endforeach
                         </div>
                     </div>
+                    <!-- Headings -->
+                    @if($edit)
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Headings</h3>
+                                <div class="panel-actions">
+                                    <div class="btn btn-primary" data-toggle="modal" data-target="#heading-modal">Add Heading</div>
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
 
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Middle Paragraph</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-resize-full" data-toggle="panel-fullscreen" aria-hidden="true"></a>
+                            <div class="panel-body" id="headings">
+                                @php
+                                    $headings = \App\Heading::whereStoreId($dataTypeContent->id)->orderBy('order')->get();
+                                @endphp
+                                @foreach($headings as $heading)
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">{{ $heading->order }} - {{ $heading->title }}</h4>
+                                            <div class="panel-actions">
+                                                <a class="panel-action voyager-angle-down" data-toggle="collapse" data-target="#panel-{{ $heading->id }}" aria-hidden="true"></a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="panel-{{ $heading->id }}">
+                                            <div class="panel-body">
+                                                <div class="col-md-9">
+                                                    {{ $heading->description }}
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="btn btn-warning" data-toggle="modal" data-id="{{ $heading->id }}" data-target="#edit-heading"><i class="voyager-edit"></i></div>
+                                                    <div class="btn btn-danger" data-toggle="modal" data-id="{{ $heading->id }}" data-title="{{ $heading->title }}" data-target="#delete-heading"><i class="voyager-x"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Faq</h3>
+                                <div class="panel-actions">
+                                    <div class="btn btn-primary" data-toggle="modal" data-target="#faq-modal">Add Faq</div>
+                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                </div>
+                            </div>
 
-                        <div class="panel-body">
-                            @include('voyager::multilingual.input-hidden', [
-                                '_field_name'  => 'middle_paragraph',
-                                '_field_trans' => 'middle_paragraph'
-                            ])
-                            @php
-                                $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                                $row = $dataTypeRows->where('field', 'middle_paragraph')->first();
-                            @endphp
-                            {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
-                        </div>
-                    </div>
-
-                    <!-- ### CONTENT ### -->
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Content</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-resize-full" data-toggle="panel-fullscreen" aria-hidden="true"></a>
+                            <div class="panel-body" id="faqs">
+                                @php
+                                    $faqs = \App\Faq::whereStoreId($dataTypeContent->id)->orderBy('order')->get();
+                                @endphp
+                                @foreach($faqs as $faq)
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">{{ $faq->order }} - {{ $faq->question }}</h4>
+                                            <div class="panel-actions">
+                                                <a class="panel-action voyager-angle-down" data-toggle="collapse" data-target="#panel-faq-{{ $faq->id }}" aria-hidden="true"></a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="panel-faq-{{ $faq->id }}">
+                                            <div class="panel-body">
+                                                <div class="col-md-9">
+                                                    {{ $faq->answer }}
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="btn btn-warning" data-toggle="modal" data-id="{{ $faq->id }}" data-target="#edit-faq"><i class="voyager-edit"></i></div>
+                                                    <div class="btn btn-danger" data-toggle="modal" data-id="{{ $faq->id }}" data-question="{{ $faq->question }}" data-target="#delete-faq"><i class="voyager-x"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-
-                        <div class="panel-body">
-                            @include('voyager::multilingual.input-hidden', [
-                                '_field_name'  => 'content',
-                                '_field_trans' => 'content'
-                            ])
-                            @php
-                                $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                                $row = $dataTypeRows->where('field', 'content')->first();
-                            @endphp
-                            {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
-                        </div>
-                    </div>
-
+                    @endif
                     <!-- ### SEO CONTENT ### -->
                     <div class="panel panel-bordered panel-info">
                         <div class="panel-heading">
@@ -253,46 +284,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Headings -->
-                    @if($edit)
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Headings</h3>
-                                <div class="panel-actions">
-                                    <div class="btn btn-primary" data-toggle="modal" data-target="#heading-modal">Add Heading</div>
-                                    <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                                </div>
-                            </div>
-
-                            <div class="panel-body" id="headings">
-                                @php
-                                    $headings = \App\Heading::whereStoreId($dataTypeContent->id)->orderBy('order')->get();
-                                @endphp
-                                @foreach($headings as $heading)
-                                    <div class="panel">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">{{ $heading->order }} - {{ $heading->title }}</h4>
-                                            <div class="panel-actions">
-                                                <a class="panel-action voyager-angle-down" data-toggle="collapse" data-target="#panel-{{ $heading->id }}" aria-hidden="true"></a>
-                                            </div>
-                                        </div>
-                                        <div class="panel-collapse collapse" id="panel-{{ $heading->id }}">
-                                            <div class="panel-body">
-                                                <div class="col-md-6">
-                                                    {{ $heading->description }}
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="btn btn-warning" data-toggle="modal" data-id="{{ $heading->id }}" data-target="#edit-heading"><i class="voyager-edit"></i></div>
-                                                    <div class="btn btn-danger" data-toggle="modal" data-id="{{ $heading->id }}" data-title="{{ $heading->title }}" data-target="#delete-heading"><i class="voyager-x"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
                 </div>
             </div>
 
@@ -367,6 +358,60 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modal-success" id="faq-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="voyager-shop"></i> Add Faq</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form class="form-edit-add" id="add-faq">
+                        <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                        <input type="hidden" value="{{ $dataTypeContent->id }}" name="store_id">
+                    @php
+                        $dataType = \TCG\Voyager\Models\DataType::whereSlug('faqs')->first();
+                        $dataTypeRows = $dataType->{('addRows' )};
+                        $exclude = ['store_id'];
+                    @endphp
+                    @foreach($dataTypeRows as $row)
+                        @if(!in_array($row->field, $exclude))
+                            @php
+                                $display_options = $row->details->display ?? NULL;
+                            @endphp
+                            @if (isset($row->details->formfields_custom))
+                                @include('voyager::formfields.custom.' . $row->details->formfields_custom)
+                            @else
+                                <div class="form-group @if($row->type == 'hidden') hidden @endif @if(isset($display_options->width)){{ 'col-md-' . $display_options->width }}@endif" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
+                                    {{ $row->slugify }}
+                                    <label for="name">{{ $row->getTranslatedAttribute('display_name') }}</label>
+                                    @include('voyager::multilingual.input-hidden-bread-edit-add')
+                                    @if($row->type == 'relationship')
+                                        @include('voyager::formfields.relationship', ['options' => $row->details])
+                                    @else
+                                        {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
+                                    @endif
+
+                                    @foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
+                                        {!! $after->handle($row, $dataType, $dataTypeContent) !!}
+                                    @endforeach
+                                </div>
+                            @endif
+                        @endif
+                    @endforeach
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="addFaq()">Add Faq</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade modal-warning" id="edit-heading">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -420,6 +465,59 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modal-warning" id="edit-faq">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="voyager-shop"></i> Edit Faq</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form class="form-edit-add" id="edit-faq-form">
+                        <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                        <input type="hidden" value="{{ $dataTypeContent->id }}" name="store_id">
+                    @php
+                        $dataType = \TCG\Voyager\Models\DataType::whereSlug('faqs')->first();
+                        $dataTypeRows = $dataType->{('editRows' )};
+                        $exclude = ['store_id'];
+                    @endphp
+                    @foreach($dataTypeRows as $row)
+                        @if(!in_array($row->field, $exclude))
+                            @php
+                                $display_options = $row->details->display ?? NULL;
+                            @endphp
+                            @if (isset($row->details->formfields_custom))
+                                @include('voyager::formfields.custom.' . $row->details->formfields_custom)
+                            @else
+                                <div class="form-group @if($row->type == 'hidden') hidden @endif @if(isset($display_options->width)){{ 'col-md-' . $display_options->width }}@endif" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
+                                    {{ $row->slugify }}
+                                    <label for="name">{{ $row->getTranslatedAttribute('display_name') }}</label>
+                                    @include('voyager::multilingual.input-hidden-bread-edit-add')
+                                    @if($row->type == 'relationship')
+                                        @include('voyager::formfields.relationship', ['options' => $row->details])
+                                    @else
+                                        {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
+                                    @endif
+
+                                    @foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
+                                        {!! $after->handle($row, $dataType, $dataTypeContent) !!}
+                                    @endforeach
+                                </div>
+                            @endif
+                        @endif
+                    @endforeach
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="editFaq()">Update Faq</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade modal-danger" id="delete-heading">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -434,6 +532,24 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('voyager::generic.cancel') }}</button>
                     <button type="button" class="btn btn-danger" onclick="deleteHeading()">{{ __('voyager::generic.delete_confirm') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-danger" id="delete-faq">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="voyager-warning"></i> Are you sure?</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>{{ __('voyager::generic.are_you_sure_delete') }} '<span class="confirm_delete_faq"></span>'</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('voyager::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteFaq()">Delete Faq</button>
                 </div>
             </div>
         </div>
@@ -551,6 +667,27 @@
                 }
             });
         }
+
+        function deleteFaq() {
+            let id = $('#delete-faq').data('id');
+            let url = "/faqs/" + id;
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: function(data)
+                {
+                    toastr.success('Faq Deleted successfully!');
+                    $('#delete-faq').modal('toggle');
+                    refreshFaqs(data);
+                },
+                error: function(e)
+                {
+                    toastr.error('Something went wrong! Please try again!!');
+                    $('#delete-faq').modal('toggle');
+                }
+            });
+        }
+
         function addHeading() {
             let form = $('#add-heading');
             let url = "{{ route('headings.store') }}";
@@ -570,6 +707,29 @@
                     form[0].reset();
                     toastr.error('Something went wrong! Please try again!!');
                     $('#heading-modal').modal('toggle');
+                }
+            });
+        }
+
+        function addFaq() {
+            let form = $('#add-faq');
+            let url = "{{ route('faqs.store') }}";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    form[0].reset();
+                    toastr.success('Faq added successfully!');
+                    $('#faq-modal').modal('toggle');
+                    refreshFaqs(data);
+                },
+                error: function(e)
+                {
+                    form[0].reset();
+                    toastr.error('Something went wrong! Please try again!!');
+                    $('#faq-modal').modal('toggle');
                 }
             });
         }
@@ -598,6 +758,30 @@
             });
         }
 
+        function editFaq() {
+            let form = $('#edit-faq-form');
+            let id = $('#edit-faq-form').data('id');
+            let url = "/faqs/" + id;
+            $.ajax({
+                type: "PUT",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    form[0].reset();
+                    toastr.success('Faq updated successfully!');
+                    $('#edit-faq').modal('toggle');
+                    refreshFaqs(data);
+                },
+                error: function(e)
+                {
+                    form[0].reset();
+                    toastr.error('Something went wrong! Please try again!!');
+                    $('#edit-faq').modal('toggle');
+                }
+            });
+        }
+
         $('#edit-heading').on('shown.bs.modal', function(event) {
             let id = $(event.relatedTarget).data('id');
             let url = "/headings/" + id;
@@ -619,9 +803,35 @@
             });
         });
 
+        $('#edit-faq').on('shown.bs.modal', function(event) {
+            let id = $(event.relatedTarget).data('id');
+            let url = "/faqs/" + id;
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data)
+                {
+                    $('#edit-faq-form input[name=question]').val(data.question);
+                    $('#edit-faq-form textarea[name=answer]').val(data.answer);
+                    $('#edit-faq-form input[name=order]').val(data.order);
+                    $('#edit-faq-form').data('id', data.id);
+                },
+                error: function(e)
+                {
+                    toastr.error('Something went wrong! Please try again!!');
+                    $('#edit-faq').modal('toggle');
+                }
+            });
+        });
+
         $('#delete-heading').on('shown.bs.modal', function(event) {
             $('.confirm_delete_heading').text($(event.relatedTarget).data('title'));
             $('#delete-heading').data('id', $(event.relatedTarget).data('id'));
+        });
+
+        $('#delete-faq').on('shown.bs.modal', function(event) {
+            $('.confirm_delete_faq').text($(event.relatedTarget).data('question'));
+            $('#delete-faq').data('id', $(event.relatedTarget).data('id'));
         });
 
         function refreshHeadings(data = []) {
@@ -636,8 +846,8 @@
                     "</div>\n" +
                     "<div class=\"panel-collapse collapse\" id=\"panel-" + v.id + "\">\n" +
                     "<div class=\"panel-body\">\n" +
-                    "<div class=\"col-md-6\">"+ (v.description || "") + "</div>" +
-                    "<div class=\"col-md-6\">" +
+                    "<div class=\"col-md-9\">"+ (v.description || "") + "</div>" +
+                    "<div class=\"col-md-3\">" +
                     "<div class=\"btn btn-warning\" data-toggle=\"modal\" data-id='" + v.id + "' data-target=\"#edit-heading\"><i class=\"voyager-edit\"></i></div>\n" +
                     "<div class=\"btn btn-danger\" data-toggle=\"modal\" data-id='" + v.id + "' data-title='" + v.title + "' data-target=\"#delete-heading\"><i class=\"voyager-x\"></i></div>\n" +
                     "</div>" +
@@ -646,6 +856,29 @@
                     "</div>\n";
             });
             $('#headings').html(headings);
+        }
+        function refreshFaqs(data = []) {
+            faqs = "";
+            $.each(data, function (i, v) {
+                faqs+= "<div class=\"panel\">\n" +
+                    "<div class=\"panel-heading\">\n" +
+                    "<h4 class=\"panel-title\">" + v.order + ' - ' + v.question + "</h4>\n" +
+                    "<div class=\"panel-actions\">\n" +
+                    "<a class=\"panel-action voyager-angle-down\" data-toggle=\"collapse\" data-target=\"#panel-faq-"+ v.id +"\" aria-hidden=\"true\"></a>\n" +
+                    "</div>\n" +
+                    "</div>\n" +
+                    "<div class=\"panel-collapse collapse\" id=\"panel-faq-" + v.id + "\">\n" +
+                    "<div class=\"panel-body\">\n" +
+                    "<div class=\"col-md-9\">"+ (v.answer || "") + "</div>" +
+                    "<div class=\"col-md-3\">" +
+                    "<div class=\"btn btn-warning\" data-toggle=\"modal\" data-id='" + v.id + "' data-target=\"#edit-faq\"><i class=\"voyager-edit\"></i></div>\n" +
+                    "<div class=\"btn btn-danger\" data-toggle=\"modal\" data-id='" + v.id + "' data-question='" + v.question + "' data-target=\"#delete-faq\"><i class=\"voyager-x\"></i></div>\n" +
+                    "</div>" +
+                    "</div>\n" +
+                    "</div>\n" +
+                    "</div>\n";
+            });
+            $('#faqs').html(faqs);
         }
     </script>
 @stop
