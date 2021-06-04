@@ -15,7 +15,7 @@ class StoreDataSeeder extends Seeder
      */
     public function run()
     {
-        if (Store::count() == 0) {
+        if (env('APP_ENV') != 'production' && Store::count() == 0) {
             $categories = Category::take(3)->get();
             foreach ($categories as $category) {
                 factory(Store::class, 5)
