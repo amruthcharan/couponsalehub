@@ -10,7 +10,7 @@
         {!! menu('main-nav', 'frontend.v1.layouts.main_menu') !!}
         <form class="navbar-form form-inline" action="{{ route('search') }}">
             <div class="input-group">
-                <input type="text" name="search" required class="form-control" placeholder="Search offers & reviews">
+                <input type="text" name="search" required class="form-control" autocomplete="false" placeholder="Search offers & reviews">
                 <div class="input-group-append">
                     <button class="btn btn-secondary" type="submit">
                         <i class="fa fa-search"></i>

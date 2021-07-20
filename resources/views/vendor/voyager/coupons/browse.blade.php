@@ -257,6 +257,9 @@
                                                     @include('vendor.voyager.coupons.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
+                                            <a href="/coupon/editor/{{$data->id}}" style="margin-right:5px" class="btn btn-sm btn-dark pull-right" title="Editor Pick">
+                                                <i class="voyager-thumbs-up"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

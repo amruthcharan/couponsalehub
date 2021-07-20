@@ -199,47 +199,25 @@
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="seo_title">SEO Title</label>
+                                <label for="seo_title">SEO Title (<span id="seo-title-length"></span>)</label>
                                 @include('voyager::multilingual.input-hidden', [
                                     '_field_name'  => 'seo_title',
                                     '_field_trans' => 'seo_title'
                                 ])
-                                <input type="text" required class="form-control" name="seo_title" placeholder="SEO Title" value="{{ $dataTypeContent->seo_title ?? '' }}">
+                                <input type="text" required class="form-control" id="seo_title" name="seo_title" placeholder="SEO Title" value="{{ $dataTypeContent->seo_title ?? '' }}">
                             </div>
                             <div class="form-group">
-                                <label for="meta_description">SEO Description</label>
+                                <label for="meta_description">SEO Description (<span id="seo-description-length"></span>)</label>
                                 @include('voyager::multilingual.input-hidden', [
                                     '_field_name'  => 'seo_description',
                                     '_field_trans' => 'seo_description'
                                 ])
-                                <textarea class="form-control" required name="seo_description">{{ $dataTypeContent->seo_description ?? '' }}</textarea>
+                                <textarea class="form-control" id="seo-description" required name="seo_description">{{ $dataTypeContent->seo_description ?? '' }}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <!-- ### IMAGE ### -->
-                    <div class="panel panel-bordered panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> Images</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <label for="logo">Logo</label>
-                            @if(isset($dataTypeContent->logo))
-                                <img src="{{ filter_var($dataTypeContent->logo, FILTER_VALIDATE_URL) ? $dataTypeContent->logo : Voyager::image( $dataTypeContent->logo ) }}" style="width:100%" />
-                            @endif
-                            <input type="file" {{$add ? 'required' : ''}} name="logo">
-                            <label for="logo">Feature Image</label>
-                            @if(isset($dataTypeContent->feature_image))
-                                <img src="{{ filter_var($dataTypeContent->feature_image, FILTER_VALIDATE_URL) ? $dataTypeContent->feature_image : Voyager::image( $dataTypeContent->feature_image ) }}" style="width:100%" />
-                            @endif
-                            <input type="file" name="feature_image">
-                        </div>
-                    </div>
-
                     <!-- ### DETAILS ### -->
                     <div class="panel panel panel-bordered panel-warning" id="details">
                         <div class="panel-heading">
@@ -255,7 +233,7 @@
                                     '_field_name'  => 'slug',
                                     '_field_trans' => 'slug'
                                 ])
-                                <input type="text" required class="form-control" id="slug" name="slug"
+                                <input type="text" @if($edit) readonly @endif required class="form-control" id="slug" name="slug"
                                     placeholder="slug"
                                     {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "slug") !!}
                                     value="{{ $dataTypeContent->slug ?? '' }}">
@@ -282,6 +260,27 @@
                                 <input type="checkbox" {{ $dataTypeContent->is_enabled ? "checked" : "" }} class="form-check-input" name="is_enabled" id="is_enabled">
                                 <label class="form-check-label" for="is_enabled">Publish</label>
                             </div>
+                        </div>
+                    </div>
+                    <!-- ### IMAGE ### -->
+                    <div class="panel panel-bordered panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="icon wb-image"></i> Images</h3>
+                            <div class="panel-actions">
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <label for="logo">Logo</label>
+                            @if(isset($dataTypeContent->logo))
+                                <img src="{{ filter_var($dataTypeContent->logo, FILTER_VALIDATE_URL) ? $dataTypeContent->logo : Voyager::image( $dataTypeContent->logo ) }}" style="width:100%" />
+                            @endif
+                            <input type="file" {{$add ? 'required' : ''}} name="logo">
+                            <label for="logo">Feature Image</label>
+                            @if(isset($dataTypeContent->feature_image))
+                                <img src="{{ filter_var($dataTypeContent->feature_image, FILTER_VALIDATE_URL) ? $dataTypeContent->feature_image : Voyager::image( $dataTypeContent->feature_image ) }}" style="width:100%" />
+                            @endif
+                            <input type="file" name="feature_image">
                         </div>
                     </div>
                 </div>
@@ -581,6 +580,7 @@
     <script>
         var params = {};
         var $file;
+        var is_edit = JSON.parse("{{ json_encode($edit) }}");
 
         function deleteHandler(tag, isMulti) {
           return function() {
@@ -601,9 +601,32 @@
         }
 
         $('document').ready(function () {
-            $('#slug').slugify();
-            $('#store-form input[name=name]').keyup(function() {
-                $('#slug').val($('#slug').val() + '-coupons');
+            $('#seo-description-length').text($('#seo-description').val().length);
+            $('#seo-title-length').text($('#seo_title').val().length);
+
+            $('#seo_title').keyup(function() {
+                $('#seo-title-length').text($(this).val().length);
+            });
+            $('#seo-description').keyup(function() {
+                $('#seo-description-length').text($(this).val().length);
+            });
+            if (!is_edit) {
+                $('#slug').slugify();
+                $('#store-form input[name=name]').keyup(function() {
+                    $('#slug').val($('#slug').val() + '-coupons');
+                });
+            }
+
+            $("input[name=affiliate_url]").keyup(function() {
+                var pattern = /^((https):\/\/)/;
+                let affurl = $(this).val();
+                if(!pattern.test(affurl) && affurl.length != 0) {
+                    $(this).css('borderColor', '#dc3545');
+                    $('button[type=submit]').prop('disabled', true);
+                } else {
+                    $(this).css('borderColor', '');
+                    $('button[type=submit]').prop('disabled', false);
+                }
             });
 
             $('.toggleswitch').bootstrapToggle();
@@ -621,10 +644,11 @@
                 $('.side-body').multilingual({"editing": true});
             @endif
 
-            $('.side-body input[data-slug-origin]').each(function(i, el) {
-                $(el).slugify();
-            });
-
+            if (!is_edit) {
+                $('.side-body input[data-slug-origin]').each(function(i, el) {
+                    $(el).slugify();
+                });
+            }
             $('.form-group').on('click', '.remove-multi-image', deleteHandler('img', true));
             $('.form-group').on('click', '.remove-single-image', deleteHandler('img', false));
             $('.form-group').on('click', '.remove-multi-file', deleteHandler('a', true));

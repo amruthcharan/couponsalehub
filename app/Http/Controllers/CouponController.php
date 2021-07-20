@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Coupon;
 use App\Store;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
@@ -333,5 +334,19 @@ class CouponController extends VoyagerBaseController
             event(new BreadDataDeleted($dataType, $data));
         }
         return redirect()->to("/admin/coupons?store_id=".$request->post('store_id'))->with($data);
+    }
+    public function editor($id) {
+        $store = Coupon::find($id);
+        if ($store->is_editor_pick) {
+            $store->update(['is_editor_pick' => false]);
+            $status = false;
+        } else {
+            $store->update(['is_editor_pick' => true]);
+            $status = true;
+        }
+        return redirect()->back()->with([
+            'message'    => 'Selected store has been ' . ($status ? 'selected' : 'unselected') . 'as editor pick',
+            'alert-type' => $status ? 'success' : 'warning',
+        ]);
     }
 }

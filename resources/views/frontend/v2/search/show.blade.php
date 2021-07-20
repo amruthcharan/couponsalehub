@@ -16,7 +16,7 @@
                                     <div class="row post-body">
                                         <form class="w-100" action="{{ route('search') }}">
                                             <div class="input-group">
-                                                <input type="text" name="search" required class="form-control" placeholder="Search offers & reviews" value="{{ $search }}">
+                                                <input type="text" name="search" required  class="form-control" autocomplete="false" placeholder="Search offers & reviews" value="{{ $search }}">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-secondary" type="submit">
                                                         <i class="fa fa-search"></i>

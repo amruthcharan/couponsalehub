@@ -22,6 +22,10 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/', 'HomeController')->name('home');
 Route::resource('/headings', 'HeadingsController');
 Route::resource('/faqs', 'FaqsController');
+Route::get('/store/publish/{id}', 'StoreController@publish');
+Route::get('/store/home/{id}', 'StoreController@home');
+Route::get('/coupon/editor/{id}', 'CouponController@editor');
+Route::get('/posts/featured/{id}', 'StoreController@featured');
 Route::get('/{test}/{test2}', 'PageController')->middleware('redirectIfPossible');
 
 

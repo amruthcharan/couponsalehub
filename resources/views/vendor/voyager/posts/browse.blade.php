@@ -256,6 +256,9 @@
                                                     @include('vendor.voyager.posts.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
+                                            <a href="/posts/featured/{{$data->id}}" style="margin-right:5px" class="btn btn-sm btn-dark pull-right" title="Featured">
+                                                <i class="voyager-home"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

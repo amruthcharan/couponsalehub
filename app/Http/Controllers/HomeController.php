@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function __invoke()
     {
         $categories = Category::homepage()->take(8);
-        $articles = Post::published()->select('slug', 'image', 'excerpt', 'title')->latest('updated_at')->take(4)->get()->toArray();
+        $articles = Post::published()->whereFeatured(true)->select('slug', 'image', 'excerpt', 'title')->latest('updated_at')->take(4)->get()->toArray();
         $slides = Slide::published()->orderBy('order')->get();
         $popular = Store::published()->wherePopularStore(true)->select('slug', 'logo', 'name')->latest('updated_at')->take(12)->get()->toArray();
         return view('frontend.' . config('nextgen.theme') . '.home', compact(['categories', 'popular', 'articles', 'slides']));

@@ -7,11 +7,11 @@
     @can ($action->getPolicy(), $data)
         @if($action->getTitle() == 'View')
             <a href="{{ route('page', $data->slug) }}" target="_blank" title="{{ $action->getTitle() }}" {!! $action->convertAttributesToHtml() !!}>
-                <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">{{ $action->getTitle() }}</span>
+                <i class="{{ $action->getIcon() }}"></i> 
             </a>
         @else
         <a href="{{ $action->getRoute($dataType->name) }}" title="{{ $action->getTitle() }}" {!! $action->convertAttributesToHtml() !!}>
-            <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">{{ $action->getTitle() }}</span>
+            <i class="{{ $action->getIcon() }}"></i>
         </a>
         @endif
     @endcan

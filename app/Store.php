@@ -23,7 +23,8 @@ class Store extends Model
         'seo_description',
         'seo_keywords',
         'logo',
-        'is_enabled'
+        'is_enabled',
+        'popular_store',
     ];
 
     protected $appends = ['coupons_count'];

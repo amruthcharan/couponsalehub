@@ -1,7 +1,7 @@
 @extends('frontend.layouts.v2')
 
-@section('title', $store->seo_title . " " . now()->format('Y') ?? $store->name)
-@section('description', $store->seo_description ?? $store->name)
+@section('title', str_replace('%year%', now()->format('Y'), $store->seo_title) ?? $store->name)
+@section('description', str_replace('%year%', now()->format('Y'), $store->seo_description) ?? $store->name)
 @section('created', $store->created_at->format('Y-m-d\Th:m:sP'))
 @section('updated', $store->updated_at->format('Y-m-d\Th:m:sP'))
 @section('body')

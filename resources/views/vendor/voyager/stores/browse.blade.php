@@ -262,6 +262,12 @@
                                                     @include('vendor.voyager.posts.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
+                                            <a href="/store/publish/{{$data->id}}" style="margin-right:5px" class="btn btn-sm btn-success pull-right" title="Publish">
+                                                <i class="voyager-power"></i>
+                                            </a>
+                                            <a href="/store/home/{{$data->id}}" style="margin-right:5px" class="btn btn-sm btn-dark pull-right" title="Home">
+                                                <i class="voyager-home"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

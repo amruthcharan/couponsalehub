@@ -6,7 +6,7 @@
     @endphp
     @can ($action->getPolicy(), $data)
         <a href="{{ $action->getRoute($dataType->name).'?store_id='.$store->id }}" title="{{ $action->getTitle() }}" {!! $action->convertAttributesToHtml() !!}>
-            <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">{{ $action->getTitle() }}</span>
+            <i class="{{ $action->getIcon() }}"></i>
         </a>
     @endcan
 @elseif (method_exists($action, 'massAction'))
