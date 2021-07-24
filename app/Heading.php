@@ -12,4 +12,9 @@ class Heading extends Model
     {
         return $this->hasMany(Coupon::class, 'heading_id', 'id');
     }
+
+    public function h3s()
+    {
+        return $this->hasMany(Heading3::class, 'heading_id', 'id');
+    }
 }

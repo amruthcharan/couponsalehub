@@ -20,7 +20,9 @@ class Coupon extends Model
         'is_editor_pick',
         'editor_order',
         'coupon_text',
-        'special_message'
+        'special_message',
+        'store_id',
+        'h3_id'
     ];
 
     protected $dates = [
@@ -48,5 +50,15 @@ class Coupon extends Model
     public function store()
     {
         return $this->belongsTo(Store::class, 'store_id', 'id');
+    }
+
+    public function heading()
+    {
+        return $this->belongsTo(Heading::class, 'heading_id', 'id');
+    }
+
+    public function h3()
+    {
+        return $this->belongsTo(Heading3::class, 'h3_id', 'id');
     }
 }

@@ -43,7 +43,7 @@ class HeadingsController extends Controller
             'store_id'    => $request->input('store_id')
         ]);
         Store::where('id', $request->store_id)->update(['updated_at' => now()]);
-        return response(Heading::whereStoreId($request->input('store_id'))->orderBy('order')->get());
+        return response(Heading::with('h3s')->whereStoreId($request->input('store_id'))->orderBy('order')->get());
     }
 
     /**
@@ -84,7 +84,7 @@ class HeadingsController extends Controller
             ]);
         Store::where('id', $request->store_id)->update(['updated_at' => now()]);
 
-        return response(Heading::whereStoreId($request->input('store_id'))->orderBy('order')->get());
+        return response(Heading::with('h3s')->whereStoreId($request->input('store_id'))->orderBy('order')->get());
     }
 
     /**
@@ -97,6 +97,6 @@ class HeadingsController extends Controller
     {
         $store_id = $heading->store_id;
         $heading->delete();
-        return response(Heading::whereStoreId($store_id)->orderBy('order')->get());
+        return response(Heading::with('h3s')->whereStoreId($store_id)->orderBy('order')->get());
     }
 }

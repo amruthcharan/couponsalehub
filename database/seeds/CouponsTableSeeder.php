@@ -111,6 +111,32 @@ class CouponsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($postDataType, 'post_belongsto_h3_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => 'Heading3',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => [
+                    "model"       => "App\\Heading3",
+                    "table"       => "headings3",
+                    "type"        => "belongsTo",
+                    "column"      => "h3_id",
+                    "key"         => "id",
+                    "label"       => "title",
+                    "pivot_table" => "headings3",
+                    "pivot"       => "0",
+                    "taggable"    => "0"
+                ],
+                'order' => 3,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($postDataType, 'heading_id');
         if (!$dataRow->exists) {
             $dataRow->fill([

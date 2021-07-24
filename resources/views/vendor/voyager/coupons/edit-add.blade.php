@@ -1,6 +1,8 @@
 @php
     $edit = !is_null($dataTypeContent->getKey());
     $add  = is_null($dataTypeContent->getKey());
+    $h2   = !$dataTypeContent->is_editor_pick && $dataTypeContent->heading_id ?? false;
+    $h3   = !$dataTypeContent->is_editor_pick && $dataTypeContent->h3_id ?? false;
 @endphp
 
 @extends('voyager::master')
@@ -53,14 +55,30 @@
                         <!-- Adding / Editing -->
                             @php
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                                $except = ['store_id', 'post_belongsto_heading_relationship'];
+                                $except = ['store_id', 'post_belongsto_heading_relationship', 'post_belongsto_h3_relationship'];
                             @endphp
-                                <div class="form-group col-md-12">
-                                    <label for="heading_id">Heading</label>
-                                    <select class="form-control" id="heading_id" name="heading_id">
+                                <div class="form-group col-md-12" style="display: {{$dataTypeContent->is_editor_pick ? 'none' : ''}}">
+                                    <label for="heading_type">Heading Type</label>
+                                    <select class="form-control" id="heading_type" name="heading_type">
                                         <option value="">---No Heading---</option>
+                                        <option value="h2"@if($h2) selected="selected"@endif>H2</option>
+                                        <option value="h3"@if($h3) selected="selected"@endif>H3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12" style="display:{{ $h2 ? '' : 'none' }}" id="h2">
+                                    <label for="heading_id">Select H2</label>
+                                    <select class="form-control" id="heading_id" name="heading_id">
                                         @foreach(\App\Heading::where('store_id', '=', app('request')->input('store_id'))->get() as $heading)
                                             <option value="{{ $heading->id }}"@if(isset($dataTypeContent->heading_id) && $dataTypeContent->heading_id == $heading->id) selected="selected"@endif>{{ $heading->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12" style="display:{{ $h3 ? '' : 'none' }}" id="h3">
+                                    <label for="h3_id">Select H3</label>
+                                    <select class="form-control" id="h3_id" name="h3_id">
+                                        
+                                        @foreach(\App\Heading3::where('store_id', '=', app('request')->input('store_id'))->get() as $h3s)
+                                            <option value="{{ $h3s->id }}"@if(isset($dataTypeContent->heading_id) && $dataTypeContent->heading_id == $h3s->id) selected="selected"@endif>{{ $h3s->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -185,10 +203,12 @@
 
         function hideAndSeekHeading() {
             if ($('input[name=is_editor_pick]').parent().hasClass('off')) {
-                $('#heading_id').parent().show();
+                $('#heading_type').parent().show();
             } else {
-                $('#heading_id').val("")
-                $('#heading_id').parent().hide();
+                $('#heading_type').val("");
+                $('#h2').hide();
+                $('#h3').hide();
+                $('#heading_type').parent().hide();
             }
         }
 
@@ -197,6 +217,18 @@
 
             $('input[name=is_editor_pick]').change(function () {
                 hideAndSeekHeading();
+            });
+            $('#heading_type').change(function () {
+                if ($(this).val() == 'h2') {
+                    $('#h2').show();
+                    $('#h3').hide();
+                } else if($(this).val() == 'h3') {
+                    $('#h3').show();
+                    $('#h2').hide();
+                } else {
+                    $('#h2').hide();
+                    $('#h3').hide();
+                }
             });
             $('select[name=type]').change(function (){
                 hideAndSeekCode();

@@ -171,6 +171,15 @@ class CouponController extends VoyagerBaseController
     public function store(Request $request)
     {
         $slug = $this->getSlug($request);
+        $htype = $request->input('heading_type');
+        if (!$htype) {
+            $request->request->add(['heading_id' => null]);
+            $request->request->add(['h3_id' => null]);
+        } elseif ($htype == 'h2') {
+            $request->request->add(['h3_id' => null]);
+        } else {
+            $request->request->add(['heading_id' => null]);
+        }
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
@@ -275,6 +284,14 @@ class CouponController extends VoyagerBaseController
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->editRows, $dataType->name, $id)->validate();
         $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
+        $htype = $request->input('heading_type');
+        if (!$htype) {
+            Coupon::find($id)->update(['heading_id' => null, 'h3_id' => null]);
+        } elseif ($htype == 'h2') {
+            Coupon::find($id)->update(['h3_id' => null]);
+        } else {
+            Coupon::find($id)->update(['heading_id' => null, 'h3_id' => $request->input('h3_id')]);
+        }
         Store::where('id', $request->store_id)->update(['updated_at' => now()]);
         event(new BreadDataUpdated($dataType, $data));
 
@@ -341,7 +358,7 @@ class CouponController extends VoyagerBaseController
             $store->update(['is_editor_pick' => false]);
             $status = false;
         } else {
-            $store->update(['is_editor_pick' => true]);
+            $store->update(['is_editor_pick' => true, 'h3_id' => null, 'heading_id' => null]);
             $status = true;
         }
         return redirect()->back()->with([

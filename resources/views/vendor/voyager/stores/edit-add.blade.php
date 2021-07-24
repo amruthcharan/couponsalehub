@@ -127,13 +127,14 @@
 
                             <div class="panel-body" id="headings">
                                 @php
-                                    $headings = \App\Heading::whereStoreId($dataTypeContent->id)->orderBy('order')->get();
+                                    $headings = \App\Heading::with('h3s')->whereStoreId($dataTypeContent->id)->orderBy('order')->get(); 
                                 @endphp
                                 @foreach($headings as $heading)
                                     <div class="panel">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">{{ $heading->order }} - {{ $heading->title }}</h4>
                                             <div class="panel-actions">
+                                                <a class="btn btn-success" onclick="addh3({{ $heading->id }})"><i class="voyager-plus"></i></a>
                                                 <a class="panel-action voyager-angle-down" data-toggle="collapse" data-target="#panel-{{ $heading->id }}" aria-hidden="true"></a>
                                             </div>
                                         </div>
@@ -149,6 +150,24 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @foreach ($heading->h3s as $h3)
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-11 panel">
+                                            <div class="panel-heading">
+                                                <div class="panel-title">
+                                                    {{ $h3->order }} - {{ $h3->title }}
+                                                </div>
+                                                <div class="panel-actions">
+                                                    <a class="btn btn-warning" onclick="edith3({{$h3->id}})"><i class="voyager-edit"></i></a>
+                                                    <a class="btn btn-danger" onclick="deleteh3({{$h3->id}})"><i class="voyager-x"></i></a>
+                                                </div>
+                                            </div>
+                                            <p>{{ $h3->description }}</p>
+
+                                        </div>
+                                    </div>
+                                    @endforeach
                                 @endforeach
                             </div>
                         </div>
@@ -357,6 +376,41 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modal-success" id="h3-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="voyager-shop"></i> Add H3</h4>
+                </div>
+                <form class="form-edit-add" id="add-h3">
+                    <div class="modal-body">
+                        <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                        <input type="hidden" value="{{ $dataTypeContent->id }}" name="store_id">
+                        <input type="hidden" value="" name="heading_id">
+                        <div class="form-group">
+                            <label for="name">Title</label>
+                            <input required type="text" class="form-control" name="title" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Description</label>
+                            <textarea class="form-control" name="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Order</label>
+                            <input required type="number" class="form-control" name="order" placeholder="order">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" onclick="addHeading3()">Add Heading</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade modal-success" id="faq-modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -464,6 +518,42 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modal-warning" id="edit-h3-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="voyager-shop"></i> Edit H3</h4>
+                </div>
+                <form class="form-edit-add" id="edit-h3-form">
+                    <div class="modal-body">
+                        <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                        <input type="hidden" value="" name="id" id="h3-id">
+                        <input type="hidden" value="" name="heading_id">
+                        <input type="hidden" value="{{ $dataTypeContent->id }}" name="store_id">
+                        <div class="form-group">
+                            <label for="name">Title</label>
+                            <input required type="text" class="form-control" name="title" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Description</label>
+                            <textarea class="form-control" name="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Order</label>
+                            <input required type="number" class="form-control" name="order" placeholder="order">
+                        </div>        
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" onclick="updateH3()">Update H3</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade modal-warning" id="edit-faq">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -531,6 +621,24 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('voyager::generic.cancel') }}</button>
                     <button type="button" class="btn btn-danger" onclick="deleteHeading()">{{ __('voyager::generic.delete_confirm') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-danger" id="delete-h3">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="voyager-warning"></i> Are you sure?</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>{{ __('voyager::generic.are_you_sure_delete') }} '<span class="confirm_delete_heading"></span>'</h4>
+                </div>
+                <input type="hidden" id="delete-h3-id" value="">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('voyager::generic.cancel') }}</button>
+                    <button type="button" class="btn btn-danger" onclick="delH3()">{{ __('voyager::generic.delete_confirm') }}</button>
                 </div>
             </div>
         </div>
@@ -691,6 +799,30 @@
                 }
             });
         }
+        function deleteh3(id) {
+            $('#delete-h3-id').val(id);
+            $('#delete-h3').modal('show');
+        }
+
+        function delH3() {
+            let id = $('#delete-h3-id').val();
+            let url = "/h3/" + id;
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: function(data)
+                {
+                    toastr.success('H3 Deleted successfully!');
+                    $('#delete-h3').modal('toggle');
+                    refreshHeadings(data);
+                },
+                error: function(e)
+                {
+                    toastr.error('Something went wrong! Please try again!!');
+                    $('#delete-h3').modal('toggle');
+                }
+            });
+        }
 
         function deleteFaq() {
             let id = $('#delete-faq').data('id');
@@ -731,6 +863,34 @@
                     form[0].reset();
                     toastr.error('Something went wrong! Please try again!!');
                     $('#heading-modal').modal('toggle');
+                }
+            });
+        }
+
+        function addh3(heading_id) {
+            $('#h3-modal').modal('show');
+            $('#h3-modal input[name=heading_id]').val(heading_id);
+        }
+
+        function addHeading3() {
+            let form = $('#add-h3');
+            let url = "{{ route('h3.store') }}";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    form[0].reset();
+                    toastr.success('H3 added successfully!');
+                    $('#h3-modal').modal('toggle');
+                    refreshHeadings(data);
+                },
+                error: function(e)
+                {
+                    form[0].reset();
+                    toastr.error('Something went wrong! Please try agaisdsn!!');
+                    $('#h3-modal').modal('toggle');
                 }
             });
         }
@@ -778,6 +938,50 @@
                     form[0].reset();
                     toastr.error('Something went wrong! Please try again!!');
                     $('#edit-heading').modal('toggle');
+                }
+            });
+        }
+
+        function edith3(h3_id) {
+            $.ajax({
+                type: "GET",
+                url: '/h3/' + h3_id,
+                success: function(data)
+                {
+                    $('#edit-h3-modal input[name=id]').val(data.id);
+                    $('#edit-h3-modal input[name=heading_id]').val(data.heading_id);
+                    $('#edit-h3-modal input[name=title]').val(data.title);
+                    $('#edit-h3-modal input[name=order]').val(data.order);
+                    $('#edit-h3-modal textarea[name=description]').val(data.description);
+                    $('#edit-h3-modal').modal('show');
+                },
+                error: function(e)
+                {
+                    toastr.error('Something went wrong! Please try again!!');
+                }
+            });
+        }
+
+        function updateH3() {
+            let form = $('#edit-h3-form');
+            let id = $('#h3-id').val();
+            let url = "/h3/" + id;
+            $.ajax({
+                type: "PUT",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    form[0].reset();
+                    toastr.success('H3 updated successfully!');
+                    $('#edit-h3-modal').modal('toggle');
+                    refreshHeadings(data);
+                },
+                error: function(e)
+                {
+                    form[0].reset();
+                    toastr.error('Something went wrong! Please try again!!');
+                    $('#edit-h3-modal').modal('toggle');
                 }
             });
         }
@@ -865,6 +1069,7 @@
                     "<div class=\"panel-heading\">\n" +
                     "<h4 class=\"panel-title\">" + v.order + ' - ' + v.title + "</h4>\n" +
                     "<div class=\"panel-actions\">\n" +
+                    "<a class=\"btn btn-success\" onclick=\"addh3(" + v.id + ")\"><i class=\"voyager-plus\"></i></a>" +
                     "<a class=\"panel-action voyager-angle-down\" data-toggle=\"collapse\" data-target=\"#panel-"+ v.id +"\" aria-hidden=\"true\"></a>\n" +
                     "</div>\n" +
                     "</div>\n" +
@@ -878,6 +1083,21 @@
                     "</div>\n" +
                     "</div>\n" +
                     "</div>\n";
+                $.each(v.h3s, function (i, h3) {
+                    headings+= "<div class=\"row\">\n" +
+                        "<div class=\"col-md-1\"></div>\n" +
+                        "<div class=\"col-md-11 panel\">\n" +
+                            "<div class=\"panel-heading\">\n" +
+                                "<div class=\"panel-title\">\n" + h3.order + ' - ' + h3.title + "</div>\n" +
+                                "<div class=\"panel-actions\">\n" +
+                                    "<a class=\"btn btn-warning\" onclick=\"edith3(" + h3.id + ")\"><i class=\"voyager-edit\"></i></a>\n" +
+                                    "<a class=\"btn btn-danger\" onclick=\"deleteh3(" + h3.id + ")\"><i class=\"voyager-x\"></i></a>\n" +
+                                "</div>\n" +
+                            "</div>\n" +
+                            "<p>" + (h3.description || "") + "</p>\n" +
+                        "</div>\n" +
+                    "</div>\n";
+                });
             });
             $('#headings').html(headings);
         }
