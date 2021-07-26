@@ -47,13 +47,9 @@
 
 <!-- Footer Bottom Start -->
 <div class="footer-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 copyright">
+    <div class="container-fluid">
+            <div class="copyright text-center">
                 <p>Copyright &copy; {{ now()->year }} {{ config('app.name') }}. All Rights Reserved</p>
-            </div>
-
-            <div class="col-md-6 template-by">
             </div>
         </div>
     </div>
