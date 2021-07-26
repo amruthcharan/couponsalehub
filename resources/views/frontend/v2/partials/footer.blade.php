@@ -54,7 +54,6 @@
             </div>
 
             <div class="col-md-6 template-by">
-                <p>Developed By <a href="https://askamruth.com">Ask Amruth</a></p>
             </div>
         </div>
     </div>
