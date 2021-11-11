@@ -34,7 +34,7 @@ Route::get('/{test}/{test2}', 'PageController')->middleware('redirectIfPossible'
 
     Route::get('/guides', 'GuidesController')->name('guides');
 
-    Route::get('/offers-and-reviews', 'ReviewsController')->name('reviews');
+    Route::get('/reviews', 'ReviewsController')->name('reviews');
 
     Route::get('/contact-us', 'ContactController@show')->name('contact');
 
